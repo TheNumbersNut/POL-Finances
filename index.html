@@ -1,0 +1,439 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
+<title>Know Your Finances</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;family=Barlow+Semi+Condensed:wght@600;700&amp;display=swap">
+<style id="page-style">
+/* Layout: one narrow phone-first column; each step is a numbered row with its screenshot underneath. */
+:root{
+  --bg:#f6f7f4; --surface:#ffffff; --fg:#1f2a22; --muted:#56635a; --line:#dde3dc;
+  --accent:#2f6b3f; --accent-soft:#e3efe5; --mark:#e8590c; --mark-soft:#fdeee4;
+  --display:"Barlow Semi Condensed", "Arial Narrow", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#141a16; --surface:#1c241f; --fg:#e8eee9; --muted:#a3b0a7; --line:#2e3a32;
+  --accent:#7fc392; --accent-soft:#22352a; --mark:#ff8a4c; --mark-soft:#3a2518; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#141a16; --surface:#1c241f; --fg:#e8eee9; --muted:#a3b0a7; --line:#2e3a32;
+  --accent:#7fc392; --accent-soft:#22352a; --mark:#ff8a4c; --mark-soft:#3a2518; color-scheme:dark }
+body{background:var(--bg); color:var(--fg); font-family:var(--body); font-size:18px; line-height:1.55;
+  padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px)); padding-block:24px 56px}
+main{max-width:560px; margin:0 auto; display:flex; flex-direction:column; gap:40px}
+h1,h2{font-family:var(--display); text-wrap:balance; line-height:1.1; margin:0}
+h1{font-size:2.3rem}
+h2{font-size:1.75rem}
+p{margin:0}
+.lede{color:var(--muted); margin-top:10px}
+.jump{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
+.jump a{flex:1 1 200px; text-align:center; text-decoration:none; font-weight:700; color:var(--accent);
+  background:var(--accent-soft); border:2px solid var(--accent); border-radius:12px; padding:14px 12px}
+.jump a:focus-visible, a:focus-visible{outline:3px solid var(--mark); outline-offset:2px}
+section{display:flex; flex-direction:column; gap:22px}
+.eyebrow{font-family:var(--display); text-transform:uppercase; letter-spacing:.08em; font-size:.95rem; color:var(--accent); font-weight:700}
+.head{display:flex; flex-direction:column; gap:6px; border-bottom:2px solid var(--line); padding-bottom:12px}
+ol.steps{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:26px}
+.step{display:grid; grid-template-columns:44px 1fr; gap:14px; align-items:start}
+.num{width:44px; height:44px; border-radius:50%; background:var(--accent); color:var(--bg); display:grid; place-items:center;
+  font-family:var(--display); font-weight:700; font-size:1.4rem}
+.body{min-width:0; display:flex; flex-direction:column; gap:12px; padding-top:6px}
+.body b{font-weight:700}
+.shot{border:1px solid var(--line); border-radius:14px; overflow:hidden; background:#262626; max-width:340px}
+.shot img{display:block; width:100%; height:auto}
+.hint{color:var(--muted); font-size:.95rem}
+p:empty{display:none}
+.callout{background:var(--mark-soft); border-left:5px solid var(--mark); border-radius:0 12px 12px 0; padding:14px 16px; display:flex; flex-direction:column; gap:8px}
+.key{display:flex; flex-direction:column; gap:14px}
+.key .row{display:grid; grid-template-columns:36px 1fr; gap:12px; align-items:start}
+.tag{width:34px; height:34px; border-radius:50%; background:var(--mark); color:#fff; display:grid; place-items:center; font-weight:700; font-family:var(--display); font-size:1.15rem}
+table{border-collapse:collapse; width:100%; font-size:1rem}
+.tablewrap{overflow-x:auto}
+th,td{text-align:left; padding:10px 8px; border-bottom:1px solid var(--line); vertical-align:top}
+th{font-family:var(--display); font-size:1.05rem}
+code{font-family:var(--body); font-weight:700; background:var(--surface); border:1px solid var(--line); border-radius:6px; padding:1px 6px; white-space:nowrap}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px; display:flex; flex-direction:column; gap:10px}
+.card ul{margin:0; padding-left:20px; display:flex; flex-direction:column; gap:8px}
+</style>
+<style id="tabs-style">
+.ask{margin-top:8px; background:var(--accent-soft); border:1px solid var(--accent); border-radius:16px; padding:18px; display:flex; flex-direction:column; gap:10px}
+.ask h3{font-family:var(--display); font-size:1.35rem; margin:0}
+.ask-btn{display:block; text-align:center; background:var(--accent); color:var(--bg); font-weight:700; text-decoration:none; padding:14px 18px; border-radius:12px}
+.ask-btn:focus-visible{outline:3px solid var(--mark); outline-offset:2px}
+.home{display:flex; flex-direction:column; gap:14px; padding-top:12px}
+.home h1{font-size:2.6rem}
+.home .lede{margin-top:0; font-size:1.05rem}
+.tiles{display:grid; grid-template-columns:1fr; gap:12px; margin-top:12px}
+.tile{display:grid; grid-template-columns:52px 1fr 24px; gap:14px; align-items:center; padding:18px 16px; border-radius:16px; background:var(--surface); border:1px solid var(--line); text-decoration:none; color:var(--fg); box-shadow:0 1px 2px rgba(0,0,0,.04); transition:border-color .15s, transform .15s}
+.tile:hover{border-color:var(--accent)}
+.tile:active{transform:scale(.99)}
+.tile:focus-visible{outline:3px solid var(--mark); outline-offset:2px}
+.tile-icon{width:52px; height:52px; border-radius:14px; background:var(--accent-soft); color:var(--accent); display:grid; place-items:center}
+.tile-icon svg, .tile-go svg, .back svg{width:26px; height:26px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+.tile-text{display:flex; flex-direction:column; gap:2px; min-width:0}
+.tile-title{font-family:var(--display); font-weight:700; font-size:1.5rem; line-height:1.1}
+.tile-desc{color:var(--muted); font-size:.98rem; line-height:1.4}
+.tile-go{color:var(--accent); display:grid; place-items:center}
+.tile-go svg{width:22px; height:22px}
+.topbar{display:flex; align-items:center; gap:12px; justify-content:space-between; border-bottom:1px solid var(--line); padding-bottom:12px}
+.back{display:inline-flex; align-items:center; gap:4px; font-weight:700; color:var(--accent); text-decoration:none; padding:10px 14px 10px 8px; border-radius:999px; background:var(--accent-soft)}
+.back svg{width:20px; height:20px}
+.back:focus-visible{outline:3px solid var(--mark); outline-offset:2px}
+.topbar-title{font-family:var(--display); font-weight:700; color:var(--muted); font-size:1.05rem; text-align:right}
+@media (prefers-reduced-motion: reduce){ .tile{transition:none} }
+[hidden]{display:none!important}
+.tabs{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:18px}
+.tabs button{font:700 1.05rem var(--body); padding:14px 8px; border-radius:12px; border:2px solid var(--accent); background:var(--accent-soft); color:var(--accent); cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--accent); color:var(--bg)}
+.tabs button:focus-visible{outline:3px solid var(--mark); outline-offset:2px}
+.tip-list{display:flex; flex-direction:column; gap:14px}
+.tip{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:16px 18px; display:flex; flex-direction:column; gap:8px}
+.tip h3{font-family:var(--display); font-size:1.3rem; line-height:1.15; margin:0; text-wrap:balance}
+.tip-body{line-height:1.55}
+.tip-empty{color:var(--muted)}
+.tip-tools{display:flex; justify-content:flex-end}
+.tip-tools button, .add-tip{font:700 .95rem var(--body); border-radius:999px; padding:8px 14px; cursor:pointer; border:2px solid var(--line); background:var(--bg); color:var(--fg)}
+.add-tip{border-color:var(--accent); color:var(--accent); align-self:flex-start; padding:12px 18px}
+.tip-tools button:focus-visible, .add-tip:focus-visible{outline:3px solid var(--mark); outline-offset:2px}
+body.editing .tip h3, body.editing .tip-body{outline:2px dashed var(--line); outline-offset:3px; border-radius:4px; cursor:text; min-height:1.4em}
+body.editing .tip h3:focus, body.editing .tip-body:focus{outline:2px solid var(--mark)}
+.tip h3:empty::before{content:"Question"; color:var(--muted)}
+.tip-body:empty::before{content:"Answer"; color:var(--muted)}
+</style>
+<style id="editor-style">
+.edit-bar{position:fixed; right:max(16px, env(safe-area-inset-right, 0px)); bottom:calc(16px + env(safe-area-inset-bottom, 0px)); z-index:20; display:flex; gap:8px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+.edit-bar button{font:700 1rem var(--body); border-radius:999px; padding:12px 18px; cursor:pointer; border:2px solid var(--accent); background:var(--surface); color:var(--accent); box-shadow:0 4px 14px rgba(0,0,0,.15)}
+.edit-bar button.primary{background:var(--accent); color:var(--bg)}
+.edit-bar button:disabled{opacity:.6; cursor:default}
+.edit-bar button:focus-visible{outline:3px solid var(--mark); outline-offset:2px}
+.edit-msg{background:var(--surface); color:var(--fg); border:1px solid var(--line); border-radius:10px; padding:8px 12px; font-size:.9rem; max-width:260px}
+body.editing [data-k]{outline:2px dashed var(--line); outline-offset:3px; border-radius:4px; cursor:text}
+body.editing [data-k]:hover, body.editing [data-k]:focus{outline-color:var(--mark)}
+body.editing [data-k]:focus{outline-style:solid}
+p:empty{display:none}
+body.editing p[data-k]:empty{display:block; min-height:1.4em}
+</style>
+
+<main>
+  <header id="home" class="home" data-views="home">
+    <h1>Know Your Finances</h1>
+    <p class="lede">A step-by-step guide for Paramount employees. Look up your own time-off balance and 401(k) numbers in the QuickBooks Workforce app, any time, from your phone.</p>
+    <nav class="tiles" aria-label="Topics">
+      <a class="tile" href="#pto" data-view="pto">
+        <span class="tile-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path><path d="M9 14.5l2 2 4-4"></path></svg></span>
+        <span class="tile-text"><span class="tile-title">PTO</span><span class="tile-desc">How much paid time off do I have left?</span></span>
+        <span class="tile-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"></path></svg></span>
+      </a>
+      <a class="tile" href="#retirement" data-view="retirement">
+        <span class="tile-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16"></path><path d="M6 15l4-4 3 3 5-6"></path><path d="M14 8h4v4"></path></svg></span>
+        <span class="tile-text"><span class="tile-title">401(k)</span><span class="tile-desc">What am I putting in, and what is the company match?</span></span>
+        <span class="tile-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"></path></svg></span>
+      </a>
+      <a class="tile" href="#tips" data-view="tips">
+        <span class="tile-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4"></path><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"></path></svg></span>
+        <span class="tile-text"><span class="tile-title">Tips</span><span class="tile-desc">Frequently Asked Questions</span></span>
+        <span class="tile-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"></path></svg></span>
+      </a>
+    </nav>
+  </header>
+
+  <div class="topbar" data-views="pto retirement tips">
+    <a class="back" href="#home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>Home</a>
+    <span class="topbar-title" id="topbar-title">Know Your Finances</span>
+  </div>
+
+  <section id="start" data-views="pto retirement">
+    <div class="head">
+      <span class="eyebrow">Start here</span>
+      <h2>Open the app</h2>
+    </div>
+    <ol class="steps">
+      <li class="step"><span class="num">1</span><div class="body">
+        <p>Open the <b>QuickBooks Workforce</b> app</p>
+      </div></li>
+      <li class="step"><span class="num">2</span><div class="body">
+        <p><b>Sign in</b></p>
+        <p>The app opens on the <b>Money</b> screen. The tabs you need are along the <b>bottom</b> of the screen.</p>
+      </div></li>
+    </ol>
+  </section>
+
+  <section id="pto" data-views="pto" role="tabpanel" aria-labelledby="tab-pto">
+    <div class="head">
+      <span class="eyebrow">PTO</span>
+      <h2>How much PTO do I have left?</h2>
+    </div>
+    <ol class="steps">
+      <li class="step"><span class="num">3</span><div class="body">
+        <p>Tap <b>Time Off</b> at the bottom of the screen (the airplane)</p>
+        <div class="shot"><img src="tab_timeoff.jpg" alt="Bottom menu with the Time Off button highlighted"></div>
+      </div></li>
+      <li class="step"><span class="num">4</span><div class="body">
+        <p>Look at the <b>Available time off</b> box. The number next to <b>Paid</b> is how many hours you have left.</p>
+        <div class="shot"><img src="timeoff.jpg" alt="Time Off screen with the Available time off box highlighted"></div>
+      </div></li>
+    </ol>
+    <div class="callout">
+      <p><b>The "h" means hours.</b></p>
+      <p><b>It updates on payday.</b> The balance is as of your latest paycheck. Time off you took after that won't be subtracted yet.</p>
+    </div>
+  </section>
+
+  <section id="retirement" data-views="retirement" role="tabpanel" aria-labelledby="tab-retirement">
+    <div class="head">
+      <span class="eyebrow">401(k)</span>
+      <h2>What's going into my 401(k) and what's it at?</h2>
+    </div>
+    <ol class="steps">
+      <li class="step"><span class="num">3</span><div class="body">
+        <p>On the <b>Money</b> screen, find <b>Latest paycheck</b> and tap <b>View details</b>.</p>
+        <div class="shot"><img src="view_details.jpg" alt="Latest paycheck card with View details highlighted"></div>
+      </div></li>
+      <li class="step"><span class="num">4</span><div class="body">
+        <p>Tap the little arrow next to <b>Deductions</b> to open it. You'll see your 401(k) line(s) for this paycheck.</p>
+        <div class="shot"><img src="deductions.jpg" alt="Deductions opened, showing the Vestwell Roth 401k Contributions line"></div>
+        <p>This tells you <b>which account you're putting money in right now</b>.</p>
+        <p class="hint">Not sure what <b>Pretax</b> and <b>Roth</b> mean? See the <b>Tips</b> tab.</p>
+      </div></li>
+      <li class="step"><span class="num">5</span><div class="body">
+        <p><b>Scroll down</b> to <b>Employer Contributions</b>. This is <b>Paramount's match</b> on this paycheck, money the company adds on top of yours.</p>
+        <div class="shot"><img src="employer.jpg" alt="Employer Contributions box highlighted"></div>
+        <div class="callout"><p>Employer Contributions will always be contributed to your Pretax 401k account.</p></div>
+      </div></li>
+      <li class="step"><span class="num">6</span><div class="body">
+        <p><b>Want totals for the whole year?</b> Scroll back to the top of the paycheck and tap <b>Year-to-date</b>.</p>
+        <div class="shot"><img src="ytd_toggle.jpg" alt="Top of the paycheck screen with the Year-to-date button highlighted"></div>
+      </div></li>
+      <li class="step"><span class="num">7</span><div class="body">
+        <p>Open <b>Deductions</b> again and scroll down. The same boxes now show <b>everything since January 1</b>.</p>
+        <div class="shot"><img src="ytd.jpg" alt="Year-to-date view with Deductions marked A and Employer Contributions marked B"></div>
+        <div class="key">
+          <div class="row"><span class="tag">A</span><p><b>Your total this year.</b> If you have more than one 401k line, add them together.</p></div>
+          <div class="row"><span class="tag">B</span><p><b>Paramount's match this year.</b> Use the <b>Total</b> line.</p></div>
+        </div>
+      </div></li>
+    </ol>
+    <div class="callout">
+      <p><b>Seeing both Pretax and Roth in Year-to-date?</b> That means you switched accounts sometime this year. The <b>This paycheck</b> view (step 4) shows what you're using now.</p>
+      <p><b>Year-to-date starts over at zero</b> every January 1.</p>
+    </div>
+  </section>
+
+  <section id="tips" data-views="tips" role="tabpanel" aria-labelledby="tab-tips">
+    <div class="head">
+      <span class="eyebrow">Tips</span>
+      <h2>Good to know</h2>
+      <p class="lede">How your 401(k) accounts work, plus answers to common questions.</p>
+    </div>
+    <div class="tip-list" id="tip-list"></div>
+    <div class="ask" id="ask-box">
+      <h3>Still have a question?</h3>
+      <p>Send it to Zach. Just your name and your question, no login needed.</p>
+      <a class="ask-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdoxVQA99gEHnJsyi5coC6ojY0OJjAPFulrJlo5sxMMeyoMVA/viewform" target="_blank" rel="noopener">Ask Zach a question</a>
+    </div>
+  </section>
+</main>
+<script type="application/json" id="tips-data">[
+ {
+  "title": "Traditional (Pretax) 401(k)",
+  "body": "Your money goes in \u003cb>before\u003c/b> income tax is taken out, so you pay less tax on each paycheck today. You pay income tax later, when you take the money out in retirement.\u003cbr>\u003cbr>On your paycheck it shows as \u003cb>Pretax 401k\u003c/b>."
+ },
+ {
+  "title": "Roth 401(k)",
+  "body": "Your money goes in \u003cb>after\u003c/b> income tax is taken out, so it doesn't lower your taxes today. When you take it out in retirement, it comes out \u003cb>tax-free\u003c/b>, growth included, as long as you're at least 59½ and the account is at least 5 years old.\u003cbr>\u003cbr>On your paycheck it shows as \u003cb>Roth 401k\u003c/b>."
+ },
+ {
+  "title": "Pretax or Roth: Which is better?",
+  "body": "It depends on your situation.\u003cbr>\u003cbr>\u003cb>Pretax\u003c/b> usually helps more if you expect to pay a lower tax rate in retirement than you do now.\u003cbr>\u003cb>Roth\u003c/b> usually helps more if you expect your tax rate to be the same or higher later."
+ },
+ {
+  "title": "The Company Match",
+  "body": "Paramount's match is extra money the company adds on top of what you put in. It shows under \u003cb>Employer Contributions\u003c/b> on your paycheck.\u003cbr>\u003cbr>The match always goes into your \u003cb>Pretax 401k\u003c/b> account, even if you chose Roth for your own money."
+ },
+ {
+  "title": "How much can I put in each year?",
+  "body": "For 2026, you can put in up to \u003cb>$24,500\u003c/b> of your own money (Pretax and Roth combined).\u003cbr>\u003cbr>The company match doesn't count toward your $24,500. The IRS updates these limits most years."
+ },
+ {
+  "title": "What does Year-to-date (YTD) mean?",
+  "body": "Everything since \u003cb>January 1\u003c/b> of this year. It starts over at zero every new year."
+ },
+ {
+  "title": "Use your latest paycheck",
+  "body": "Any paycheck works, but your \u003cb>latest paycheck\u003c/b> always has the most up-to-date year totals."
+ },
+ {
+  "title": "Need help?",
+  "body": "Numbers look wrong, or you still can't sign in? Talk to Zach."
+ }
+]</script>
+<script id="router-script">
+(function(){
+  var VIEWS = ['home', 'pto', 'retirement', 'tips'];
+  function current(){
+    var h = (location.hash || '').replace('#', '');
+    if (VIEWS.indexOf(h) >= 0) return h;
+    try { var s = (sessionStorage.getItem('guide-view') || '').replace('#', ''); sessionStorage.removeItem('guide-view'); if (VIEWS.indexOf(s) >= 0) return s; } catch (e) {}
+    return 'home';
+  }
+  function show(v, scroll){
+    document.querySelectorAll('[data-views]').forEach(function(s){ s.hidden = s.getAttribute('data-views').split(' ').indexOf(v) < 0; });
+    var h1 = document.querySelector('.home h1'), tt = document.getElementById('topbar-title');
+    if (h1 && tt) tt.textContent = h1.textContent;
+    if (scroll) window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', function(){ show(current(), true); });
+  show(current(), false);
+})();
+</script>
+<script id="editor-script">
+(function(){
+  var SEL = 'h1, .lede, .eyebrow, main h2, .body p, .callout p, .key p, .tile-title, .tile-desc';
+  var main = document.querySelector('main');
+  if (!main) return;
+  var nodes = Array.prototype.slice.call(main.querySelectorAll(SEL));
+  nodes.forEach(function(n, i){ n.setAttribute('data-k', String(i)); });
+  var pristine = main.cloneNode(true);
+  var tipList = document.getElementById('tip-list');
+  var tips = [];
+  try { tips = JSON.parse(document.getElementById('tips-data').textContent) || []; } catch (e) { tips = []; }
+  var artifact = null, editing = false, saved = {}, canEditPage = false;
+
+  function clean(html){
+    var t = document.createElement('template'); t.innerHTML = html;
+    (function walk(el){
+      Array.prototype.slice.call(el.childNodes).forEach(function(c){
+        if (c.nodeType === 1) {
+          walk(c);
+          var tag = c.tagName.toLowerCase();
+          if (tag === 'b' || tag === 'strong') { var b = document.createElement('b'); while (c.firstChild) b.appendChild(c.firstChild); c.replaceWith(b); }
+          else if (tag === 'br') { c.replaceWith(document.createElement('br')); }
+          else if (tag === 'code') { var k = document.createElement('code'); k.textContent = c.textContent; c.replaceWith(k); }
+          else if (tag === 'div' || tag === 'p') { var f = document.createDocumentFragment(); f.appendChild(document.createElement('br')); while (c.firstChild) f.appendChild(c.firstChild); c.replaceWith(f); }
+          else { var g = document.createDocumentFragment(); while (c.firstChild) g.appendChild(c.firstChild); c.replaceWith(g); }
+        } else if (c.nodeType !== 3) { c.remove(); }
+      });
+    })(t.content);
+    var d = document.createElement('div'); d.appendChild(t.content);
+    return d.innerHTML.replace(/^(\s*<br>)+/, '').replace(/(<br>\s*)+$/, '').trim();
+  }
+
+  function renderTips(){
+    tipList.innerHTML = '';
+    if (!tips.length && !editing) {
+      var e = document.createElement('p'); e.className = 'tip-empty'; e.textContent = 'No tips yet.'; tipList.appendChild(e);
+    }
+    tips.forEach(function(tp, i){
+      var a = document.createElement('article'); a.className = 'tip';
+      var h = document.createElement('h3'); h.innerHTML = tp.title || '';
+      var b = document.createElement('div'); b.className = 'tip-body'; b.innerHTML = tp.body || '';
+      a.append(h, b);
+      if (editing) {
+        h.setAttribute('contenteditable', 'true'); b.setAttribute('contenteditable', 'true');
+        var tools = document.createElement('div'); tools.className = 'tip-tools';
+        var rm = document.createElement('button'); rm.type = 'button'; rm.textContent = 'Remove';
+        rm.addEventListener('click', function(){ tips = readTips(); tips.splice(i, 1); renderTips(); });
+        tools.appendChild(rm); a.appendChild(tools);
+      }
+      tipList.appendChild(a);
+    });
+    if (editing || canEditPage) {
+      var add = document.createElement('button'); add.type = 'button'; add.className = 'add-tip'; add.textContent = '+ Add a question & answer';
+      add.addEventListener('click', function(){
+        if (!editing) setEditing(true);
+        tips = readTips(); tips.push({title: '', body: ''}); renderTips();
+        var last = tipList.querySelectorAll('.tip h3'); if (last.length) { last[last.length - 1].scrollIntoView({block: 'center'}); last[last.length - 1].focus(); }
+      });
+      tipList.appendChild(add);
+    }
+  }
+
+  function readTips(){
+    return Array.prototype.slice.call(tipList.querySelectorAll('.tip')).map(function(a){
+      return { title: clean(a.querySelector('h3').innerHTML), body: clean(a.querySelector('.tip-body').innerHTML) };
+    });
+  }
+
+  function buildDoc(tipState){
+    var out = pristine.cloneNode(true);
+    nodes.forEach(function(n, i){
+      var target = out.querySelector('[data-k="' + i + '"]');
+      if (target) target.innerHTML = clean(n.innerHTML);
+    });
+    out.querySelectorAll('[data-k]').forEach(function(n){ n.removeAttribute('data-k'); });
+    out.querySelectorAll('[hidden]').forEach(function(n){ n.removeAttribute('hidden'); });
+        var json = JSON.stringify(tipState.filter(function(t){ return t.title || t.body; }), null, 1).replace(/</g, '\\u003c');
+    var parts = ['title', 'meta[name="claude:viewport-fit-sides"]', 'link[rel="stylesheet"]', '#page-style', '#tabs-style', '#editor-style']
+      .map(function(s){ var e = document.querySelector(s); return e ? e.outerHTML : ''; }).join('\n');
+    var router = document.getElementById('router-script');
+    var script = document.getElementById('editor-script');
+    return '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>\n'
+      + parts + '\n\n' + out.outerHTML + '\n<script type="application/json" id="tips-data">' + json + '<\/script>\n'
+      + router.outerHTML + '\n' + script.outerHTML + '\n';
+  }
+
+  renderTips();
+
+  var bar = document.createElement('div'); bar.className = 'edit-bar'; bar.hidden = true;
+  var msg = document.createElement('div'); msg.className = 'edit-msg'; msg.hidden = true; msg.setAttribute('role', 'status');
+  var btnEdit = document.createElement('button'); btnEdit.type = 'button'; btnEdit.id = 'btn-edit'; btnEdit.textContent = 'Edit text';
+  var btnCancel = document.createElement('button'); btnCancel.type = 'button'; btnCancel.id = 'btn-cancel'; btnCancel.textContent = 'Cancel'; btnCancel.hidden = true;
+  var btnSave = document.createElement('button'); btnSave.type = 'button'; btnSave.id = 'btn-save'; btnSave.className = 'primary'; btnSave.textContent = 'Save changes'; btnSave.hidden = true;
+  bar.append(msg, btnCancel, btnSave, btnEdit);
+  document.body.appendChild(bar);
+
+  function say(t){ msg.textContent = t; msg.hidden = !t; }
+  var savedTips = [];
+
+  function setEditing(on){
+    editing = on;
+    document.body.classList.toggle('editing', on);
+    nodes.forEach(function(n){ if (on) n.setAttribute('contenteditable', 'true'); else n.removeAttribute('contenteditable'); });
+    btnEdit.hidden = on; btnSave.hidden = !on; btnCancel.hidden = !on;
+    say(on ? 'Tap any text to change it. Ctrl/Cmd+B makes text bold. On the home screen, tap a topic\'s arrow to open it. On Tips you can add or remove questions.' : '');
+    if (on) { nodes.forEach(function(n, i){ saved[i] = n.innerHTML; }); savedTips = JSON.parse(JSON.stringify(tips)); }
+    renderTips();
+  }
+
+  main.addEventListener('click', function(e){
+    if (editing && e.target.closest('.tile [contenteditable]')) e.preventDefault();
+  });
+  main.addEventListener('paste', function(e){
+    if (!editing) return;
+    e.preventDefault();
+    var text = (e.clipboardData || window.clipboardData).getData('text/plain');
+    document.execCommand('insertText', false, text);
+  });
+
+  btnEdit.addEventListener('click', function(){ setEditing(true); });
+  btnCancel.addEventListener('click', function(){
+    nodes.forEach(function(n, i){ n.innerHTML = saved[i]; });
+    tips = savedTips;
+    setEditing(false);
+  });
+  btnSave.addEventListener('click', function(){
+    btnSave.disabled = true; btnCancel.disabled = true; say('Saving...');
+    try { sessionStorage.setItem('guide-view', location.hash || ''); } catch (e) {}
+    artifact.publish(buildDoc(readTips())).then(function(){
+      say('Saved.');
+    }).catch(function(err){
+      var code = err && err.code;
+      btnSave.disabled = false; btnCancel.disabled = false;
+      if (code === 'conflict') { say('Someone else saved a newer version. Loading it now.'); }
+      else if (code === 'not_writer' || code === 'not_granted' || code === 'not_declared' || code === 'capability_disabled' || code === 'consent_required') {
+        say('This view is read-only, so changes can\'t be saved here.'); btnSave.hidden = true;
+      } else if (code === 'too_large') { say('The page is too large to save.'); }
+      else if (code === 'rate_limited') { say('Saving too often. Wait a minute and try again.'); }
+      else { say('Couldn\'t save just now. Try again in a moment.'); }
+    });
+  });
+
+  if (window.claude && window.claude.use) {
+    Promise.all([window.claude.use('artifact'), window.claude.use('user')]).then(function(r){
+      artifact = r[0]; var user = r[1];
+      if (!artifact || !user) return;
+      return user.canEdit().then(function(ok){ if (ok) { bar.hidden = false; canEditPage = true; if (!editing) renderTips(); } });
+    }).catch(function(){});
+  }
+})();
+</script>
+
+</body></html>
