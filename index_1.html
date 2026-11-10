@@ -1,0 +1,746 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
+<title>Know Your Finances</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;family=Barlow+Semi+Condensed:wght@600;700&amp;display=swap">
+<style id="page-style">
+/* Layout: one narrow phone-first column; each step is a numbered row with its screenshot underneath. */
+:root{
+  --bg:#f6f7f4; --surface:#ffffff; --fg:#1f2a22; --muted:#56635a; --line:#dde3dc;
+  --accent:#2f6b3f; --accent-soft:#e3efe5; --mark:#e8590c; --mark-soft:#fdeee4;
+  --display:"Barlow Semi Condensed", "Arial Narrow", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#141a16; --surface:#1c241f; --fg:#e8eee9; --muted:#a3b0a7; --line:#2e3a32;
+  --accent:#7fc392; --accent-soft:#22352a; --mark:#ff8a4c; --mark-soft:#3a2518; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#141a16; --surface:#1c241f; --fg:#e8eee9; --muted:#a3b0a7; --line:#2e3a32;
+  --accent:#7fc392; --accent-soft:#22352a; --mark:#ff8a4c; --mark-soft:#3a2518; color-scheme:dark }
+body{background:var(--bg); color:var(--fg); font-family:var(--body); font-size:18px; line-height:1.55;
+  padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px)); padding-block:24px 56px}
+main{max-width:560px; margin:0 auto; display:flex; flex-direction:column; gap:40px}
+h1,h2{font-family:var(--display); text-wrap:balance; line-height:1.1; margin:0}
+h1{font-size:2.3rem}
+h2{font-size:1.75rem}
+p{margin:0}
+.lede{color:var(--muted); margin-top:10px}
+.jump{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
+.jump a{flex:1 1 200px; text-align:center; text-decoration:none; font-weight:700; color:var(--accent);
+  background:var(--accent-soft); border:2px solid var(--accent); border-radius:12px; padding:14px 12px}
+.jump a:focus-visible, a:focus-visible{outline:3px solid var(--mark); outline-offset:2px}
+section{display:flex; flex-direction:column; gap:22px}
+.eyebrow{font-family:var(--display); text-transform:uppercase; letter-spacing:.08em; font-size:.95rem; color:var(--accent); font-weight:700}
+.head{display:flex; flex-direction:column; gap:6px; border-bottom:2px solid var(--line); padding-bottom:12px}
+ol.steps{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:26px}
+.step{display:grid; grid-template-columns:44px 1fr; gap:14px; align-items:start}
+.num{width:44px; height:44px; border-radius:50%; background:var(--accent); color:var(--bg); display:grid; place-items:center;
+  font-family:var(--display); font-weight:700; font-size:1.4rem}
+.body{min-width:0; display:flex; flex-direction:column; gap:12px; padding-top:6px}
+.body b{font-weight:700}
+.shot{border:1px solid var(--line); border-radius:14px; overflow:hidden; background:#262626; max-width:340px}
+.shot img{display:block; width:100%; height:auto}
+.hint{color:var(--muted); font-size:.95rem}
+p:empty{display:none}
+.callout{background:var(--mark-soft); border-left:5px solid var(--mark); border-radius:0 12px 12px 0; padding:14px 16px; display:flex; flex-direction:column; gap:8px}
+.key{display:flex; flex-direction:column; gap:14px}
+.key .row{display:grid; grid-template-columns:36px 1fr; gap:12px; align-items:start}
+.tag{width:34px; height:34px; border-radius:50%; background:var(--mark); color:#fff; display:grid; place-items:center; font-weight:700; font-family:var(--display); font-size:1.15rem}
+table{border-collapse:collapse; width:100%; font-size:1rem}
+.tablewrap{overflow-x:auto}
+th,td{text-align:left; padding:10px 8px; border-bottom:1px solid var(--line); vertical-align:top}
+th{font-family:var(--display); font-size:1.05rem}
+code{font-family:var(--body); font-weight:700; background:var(--surface); border:1px solid var(--line); border-radius:6px; padding:1px 6px; white-space:nowrap}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px; display:flex; flex-direction:column; gap:10px}
+.card ul{margin:0; padding-left:20px; display:flex; flex-direction:column; gap:8px}
+</style>
+<style id="tabs-style">
+.home{display:flex; flex-direction:column; gap:14px; padding-top:12px}
+.home h1{font-size:2.6rem}
+.home .lede{margin-top:0; font-size:1.05rem}
+.tiles{display:grid; grid-template-columns:1fr; gap:12px; margin-top:12px}
+.tile{display:grid; grid-template-columns:52px 1fr 24px; gap:14px; align-items:center; padding:18px 16px; border-radius:16px; background:var(--surface); border:1px solid var(--line); text-decoration:none; color:var(--fg); box-shadow:0 1px 2px rgba(0,0,0,.04); transition:border-color .15s, transform .15s}
+.tile:hover{border-color:var(--accent)}
+.tile:active{transform:scale(.99)}
+.tile:focus-visible{outline:3px solid var(--mark); outline-offset:2px}
+.tile-icon{width:52px; height:52px; border-radius:14px; background:var(--accent-soft); color:var(--accent); display:grid; place-items:center}
+.tile-icon svg, .tile-go svg, .back svg{width:26px; height:26px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+.tile-text{display:flex; flex-direction:column; gap:2px; min-width:0}
+.tile-title{font-family:var(--display); font-weight:700; font-size:1.5rem; line-height:1.1}
+.tile-desc{color:var(--muted); font-size:.98rem; line-height:1.4}
+.tile-go{color:var(--accent); display:grid; place-items:center}
+.tile-go svg{width:22px; height:22px}
+.topbar{display:flex; align-items:center; gap:12px; justify-content:space-between; border-bottom:1px solid var(--line); padding-bottom:12px}
+.back{display:inline-flex; align-items:center; gap:4px; font-weight:700; color:var(--accent); text-decoration:none; padding:10px 14px 10px 8px; border-radius:999px; background:var(--accent-soft)}
+.back svg{width:20px; height:20px}
+.back:focus-visible{outline:3px solid var(--mark); outline-offset:2px}
+.topbar-title{font-family:var(--display); font-weight:700; color:var(--muted); font-size:1.05rem; text-align:right}
+@media (prefers-reduced-motion: reduce){ .tile{transition:none} }
+[hidden]{display:none!important}
+.tabs{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:18px}
+.tabs button{font:700 1.05rem var(--body); padding:14px 8px; border-radius:12px; border:2px solid var(--accent); background:var(--accent-soft); color:var(--accent); cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--accent); color:var(--bg)}
+.tabs button:focus-visible{outline:3px solid var(--mark); outline-offset:2px}
+.tip-list{display:flex; flex-direction:column; gap:14px}
+.tip{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:16px 18px; display:flex; flex-direction:column; gap:8px}
+.tip h3{font-family:var(--display); font-size:1.3rem; line-height:1.15; margin:0; text-wrap:balance}
+.tip-body{line-height:1.55}
+.tip-empty{color:var(--muted)}
+.tip-tools{display:flex; justify-content:flex-end}
+.tip-tools button, .add-tip{font:700 .95rem var(--body); border-radius:999px; padding:8px 14px; cursor:pointer; border:2px solid var(--line); background:var(--bg); color:var(--fg)}
+.add-tip{border-color:var(--accent); color:var(--accent); align-self:flex-start; padding:12px 18px}
+.tip-tools button:focus-visible, .add-tip:focus-visible{outline:3px solid var(--mark); outline-offset:2px}
+body.editing .tip h3, body.editing .tip-body{outline:2px dashed var(--line); outline-offset:3px; border-radius:4px; cursor:text; min-height:1.4em}
+body.editing .tip h3:focus, body.editing .tip-body:focus{outline:2px solid var(--mark)}
+.tip h3:empty::before{content:"Question"; color:var(--muted)}
+.tip-body:empty::before{content:"Answer"; color:var(--muted)}
+
+.ask{margin-top:8px; background:var(--accent-soft); border:1px solid var(--accent); border-radius:16px; padding:18px; display:flex; flex-direction:column; gap:10px}
+.ask h3{font-family:var(--display); font-size:1.35rem; margin:0}
+.ask-btn{display:block; text-align:center; background:var(--accent); color:var(--bg); font-weight:700; text-decoration:none; padding:14px 18px; border-radius:12px}
+.ask-btn:focus-visible{outline:3px solid var(--mark); outline-offset:2px}
+</style>
+<style id="vestwell-style">
+.flow{display:grid;grid-template-columns:1fr;gap:10px}
+.flow .box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center}
+.flow .ic{width:44px;height:44px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:1.2rem}
+.flow .arrow{text-align:center;color:var(--muted);font-size:1.3rem;line-height:1}
+.flow b{display:block;font-family:var(--display);font-size:1.2rem}
+.flow span.d{color:var(--muted);font-size:.95rem}
+.tour{display:flex;flex-direction:column;gap:10px;margin:0;padding:0;list-style:none}
+.tour li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.tour li b{font-family:var(--display);font-size:1.12rem}
+.checklist{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px}
+</style>
+<style id="editor-style">
+.edit-bar{position:fixed; right:max(16px, env(safe-area-inset-right, 0px)); bottom:calc(16px + env(safe-area-inset-bottom, 0px)); z-index:20; display:flex; gap:8px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+.edit-bar button{font:700 1rem var(--body); border-radius:999px; padding:12px 18px; cursor:pointer; border:2px solid var(--accent); background:var(--surface); color:var(--accent); box-shadow:0 4px 14px rgba(0,0,0,.15)}
+.edit-bar button.primary{background:var(--accent); color:var(--bg)}
+.edit-bar button:disabled{opacity:.6; cursor:default}
+.edit-bar button:focus-visible{outline:3px solid var(--mark); outline-offset:2px}
+.edit-msg{background:var(--surface); color:var(--fg); border:1px solid var(--line); border-radius:10px; padding:8px 12px; font-size:.9rem; max-width:260px}
+body.editing [data-k]{outline:2px dashed var(--line); outline-offset:3px; border-radius:4px; cursor:text}
+body.editing [data-k]:hover, body.editing [data-k]:focus{outline-color:var(--mark)}
+body.editing [data-k]:focus{outline-style:solid}
+p:empty{display:none}
+body.editing p[data-k]:empty{display:block; min-height:1.4em}
+</style>
+
+<main>
+  <header id="home" class="home" data-views="home">
+    <h1>Know Your Finances</h1>
+    <p class="lede">A step-by-step guide for Paramount employees. Look up your own time-off balance and 401(k) numbers in the QuickBooks Workforce app, any time, from your phone.</p>
+    <nav class="tiles" aria-label="Topics">
+      <a class="tile" href="#pto" data-view="pto">
+        <span class="tile-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path><path d="M9 14.5l2 2 4-4"></path></svg></span>
+        <span class="tile-text"><span class="tile-title">PTO</span><span class="tile-desc">How much paid time off do I have left?</span></span>
+        <span class="tile-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"></path></svg></span>
+      </a>
+      <a class="tile" href="#retirement" data-view="retirement">
+        <span class="tile-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16"></path><path d="M6 15l4-4 3 3 5-6"></path><path d="M14 8h4v4"></path></svg></span>
+        <span class="tile-text"><span class="tile-title">401(k)</span><span class="tile-desc">What am I putting in, and what is the company match?</span></span>
+        <span class="tile-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"></path></svg></span>
+      </a>
+      <a class="tile" href="#vestwell" data-view="vestwell">
+        <span class="tile-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="3"></ellipse><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"></path><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"></path></svg></span>
+        <span class="tile-text"><span class="tile-title">Vestwell</span><span class="tile-desc">Check your balance, change how much you save, and pick investments.</span></span>
+        <span class="tile-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"></path></svg></span>
+      </a>
+      <a class="tile" href="#money" data-view="money">
+        <span class="tile-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2.5"></rect><path d="M3 10h18"></path><path d="M16 14.5h2"></path><path d="M6 6l9-3 1.5 3"></path></svg></span>
+        <span class="tile-text"><span class="tile-title">Money Basics</span><span class="tile-desc">Simple habits to handle surprises, get out of debt, and save more.</span></span>
+        <span class="tile-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"></path></svg></span>
+      </a>
+      <a class="tile" href="#tips" data-view="tips">
+        <span class="tile-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4"></path><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"></path></svg></span>
+        <span class="tile-text"><span class="tile-title">Tips</span><span class="tile-desc">Frequently Asked Questions</span></span>
+        <span class="tile-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"></path></svg></span>
+      </a>
+    </nav>
+  </header>
+
+  <div class="topbar" data-views="pto retirement vestwell money tips">
+    <a class="back" href="#home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>Home</a>
+    <span class="topbar-title" id="topbar-title">Know Your Finances</span>
+  </div>
+
+  <section id="start" data-views="pto retirement">
+    <div class="head">
+      <span class="eyebrow">Start here</span>
+      <h2>Open the app</h2>
+    </div>
+    <ol class="steps">
+      <li class="step"><span class="num">1</span><div class="body">
+        <p>Open the <b>QuickBooks Workforce</b> app</p>
+      </div></li>
+      <li class="step"><span class="num">2</span><div class="body">
+        <p><b>Sign in</b></p>
+        <p>The app opens on the <b>Money</b> screen. The tabs you need are along the <b>bottom</b> of the screen.</p>
+      </div></li>
+    </ol>
+  </section>
+
+  <section id="pto" data-views="pto" role="tabpanel" aria-labelledby="tab-pto">
+    <div class="head">
+      <span class="eyebrow">PTO</span>
+      <h2>How much PTO do I have left?</h2>
+    </div>
+    <ol class="steps">
+      <li class="step"><span class="num">3</span><div class="body">
+        <p>Tap <b>Time Off</b> at the bottom of the screen (the airplane)</p>
+        <div class="shot"><img src="tab_timeoff.jpg" alt="Bottom menu with the Time Off button highlighted"></div>
+      </div></li>
+      <li class="step"><span class="num">4</span><div class="body">
+        <p>Look at the <b>Available time off</b> box. The number next to <b>Paid</b> is how many hours you have left.</p>
+        <div class="shot"><img src="timeoff.jpg" alt="Time Off screen with the Available time off box highlighted"></div>
+      </div></li>
+    </ol>
+    <div class="callout">
+      <p><b>The "h" means hours.</b></p>
+      <p><b>It updates on payday.</b> The balance is as of your latest paycheck. Time off you took after that won't be subtracted yet.</p>
+    </div>
+  </section>
+
+  <section id="retirement" data-views="retirement" role="tabpanel" aria-labelledby="tab-retirement">
+    <div class="head">
+      <span class="eyebrow">401(k)</span>
+      <h2>What's going into my 401(k) and what's it at?</h2>
+    </div>
+    <ol class="steps">
+      <li class="step"><span class="num">3</span><div class="body">
+        <p>On the <b>Money</b> screen, find <b>Latest paycheck</b> and tap <b>View details</b>.</p>
+        <div class="shot"><img src="view_details.jpg" alt="Latest paycheck card with View details highlighted"></div>
+      </div></li>
+      <li class="step"><span class="num">4</span><div class="body">
+        <p>Tap the little arrow next to <b>Deductions</b> to open it. You'll see your 401(k) line(s) for this paycheck.</p>
+        <div class="shot"><img src="deductions.jpg" alt="Deductions opened, showing the Vestwell Roth 401k Contributions line"></div>
+        <p>This tells you <b>which account you're putting money in right now</b>.</p>
+        <p class="hint">Not sure what <b>Pretax</b> and <b>Roth</b> mean? See the <b>Tips</b> tab.</p>
+      </div></li>
+      <li class="step"><span class="num">5</span><div class="body">
+        <p><b>Scroll down</b> to <b>Employer Contributions</b>. This is <b>Paramount's match</b> on this paycheck, money the company adds on top of yours.</p>
+        <div class="shot"><img src="employer.jpg" alt="Employer Contributions box highlighted"></div>
+        <div class="callout"><p>Employer Contributions will always be contributed to your Pretax 401k account.</p></div>
+      </div></li>
+      <li class="step"><span class="num">6</span><div class="body">
+        <p><b>Want totals for the whole year?</b> Scroll back to the top of the paycheck and tap <b>Year-to-date</b>.</p>
+        <div class="shot"><img src="ytd_toggle.jpg" alt="Top of the paycheck screen with the Year-to-date button highlighted"></div>
+      </div></li>
+      <li class="step"><span class="num">7</span><div class="body">
+        <p>Open <b>Deductions</b> again and scroll down. The same boxes now show <b>everything since January 1</b>.</p>
+        <div class="shot"><img src="ytd.jpg" alt="Year-to-date view with Deductions marked A and Employer Contributions marked B"></div>
+        <div class="key">
+          <div class="row"><span class="tag">A</span><p><b>Your total this year.</b> If you have more than one 401k line, add them together.</p></div>
+          <div class="row"><span class="tag">B</span><p><b>Paramount's match this year.</b> Use the <b>Total</b> line.</p></div>
+        </div>
+      </div></li>
+    </ol>
+    <div class="callout">
+      <p><b>Seeing both Pretax and Roth in Year-to-date?</b> That means you switched accounts sometime this year. The <b>This paycheck</b> view (step 4) shows what you're using now.</p>
+      <p><b>Year-to-date starts over at zero</b> every January 1.</p>
+    </div>
+  </section>
+
+
+  <section id="vestwell" data-views="vestwell">
+    <div class="head">
+      <span class="eyebrow">401(k) in Vestwell</span>
+      <h2>Your 401(k) in Vestwell</h2>
+      <p class="lede">Where your 401(k) money lives, how to check it, and how to change what you put in.</p>
+    </div>
+  </section>
+
+
+  <section data-views="vestwell">
+    <div class="head"><span class="eyebrow">The basics</span><h2>Where does my 401(k) money go?</h2></div>
+    <p>Two places handle your 401(k).</p>
+    <div class="flow">
+      <div class="box"><span class="ic">1</span><div><b>Your paycheck (QuickBooks Workforce)</b><span class="d">Takes your 401(k) money out of each check and sends it to Vestwell.</span></div></div>
+      <div class="arrow">↓</div>
+      <div class="box"><span class="ic">2</span><div><b>Vestwell</b><span class="d">Your 401(k) account. It holds your money, and it's where you see your balance, change how much you save, and pick investments.</span></div></div>
+    </div>
+    <div class="callout"><p><b>Rule of thumb:</b> Workforce shows what came out of your paycheck. Vestwell shows what's in your account and is where you make changes.</p></div>
+  </section>
+
+  <section data-views="vestwell">
+    <div class="head"><span class="eyebrow">Step 1</span><h2>Get into your account</h2></div>
+    <ol class="steps">
+      <li class="step"><span class="num">1</span><div class="body">
+        <p>Download the <b>Vestwell</b> app from the App Store (iPhone) or Google Play (Android). You can also use <b>vestwell.com</b> on a computer.</p>
+      </div></li>
+      <li class="step"><span class="num">2</span><div class="body">
+        <p><b>First time?</b> Once you're eligible, Vestwell sends you a welcome email. Follow its link to create your login. You're eligible after <b>6 months</b> on the job.</p>
+      </div></li>
+      <li class="step"><span class="num">3</span><div class="body">
+        <p>Tap <b>Sign In</b> and enter your email and password. Vestwell will text or email you a code to finish signing in.</p>
+        <p class="hint">Tip: turn on Face ID or fingerprint sign-in when the app offers it, so you don't need your password every time.</p>
+      </div></li>
+    </ol>
+  </section>
+
+  <section data-views="vestwell">
+    <div class="head"><span class="eyebrow">Step 2</span><h2>Your home screen, explained</h2></div>
+    <p>After you sign in, you land on <b>Retirement Overview</b>. Here's what each part means.</p>
+    <div class="shot"><img src="vestwell_home.jpg" alt="Vestwell Retirement Overview screen showing Retirement Savings and the Withdrawals and Rollovers button"></div>
+    <p>The buttons along the <b>bottom</b> of the app:</p>
+    <div class="shot"><img src="vestwell_tabs.jpg" alt="Vestwell bottom menu: home, piggy bank, chart, document, person icons"></div>
+    <ul class="tour">
+      <li><b>House</b> Home (Retirement Overview).</li>
+      <li><b>Piggy bank</b> Account details: your balance split into Pretax, Roth and company money.</li>
+      <li><b>Chart</b> Investments: what you own and how it's grown.</li>
+      <li><b>Document</b> Statements and plan documents.</li>
+      <li><b>Person</b> Your profile: address, phone, email.</li>
+    </ul>
+    <ul class="tour">
+      <li><b>Retirement Savings</b><br>How much is in your account right now, and a chart of how it's grown.</li>
+      <li><b>Savings Rates</b><br>How much comes out of each paycheck, and whether it goes to Pretax, Roth, or both. This is where you make changes.</li>
+      <li><b>Investment Strategy</b><br>How your money is invested.</li>
+      <li><b>Beneficiary</b><br>Who gets your account if something happens to you.</li>
+      <li><b>Recent Activity</b><br>Every deposit into your account. <b>Saver Contribution</b> is your money (it says Pretax or Roth under it). <b>Employer Contribution</b> is Paramount's match. <b>Pending</b> means it's from your latest paycheck and is still on its way.</li>
+      <li><b>My 2026 Contributions</b><br>How much you've put in this year, with a bar showing how close you are to the yearly IRS limit ($24,500 in 2026).</li>
+      <li><b>Withdrawals &amp; Rollovers</b><br>For taking money out, or moving a 401(k) from another job. Most people won't touch this until they leave or retire.</li>
+    </ul>
+    <p>Here's what <b>Recent Activity</b> looks like. Each paycheck adds two lines: your money and Paramount's match.</p>
+    <div class="shot"><img src="vestwell_activity.jpg" alt="Recent Activity list showing Saver Contribution (Roth) and Employer Contribution lines"></div>
+  </section>
+
+  <section data-views="vestwell">
+    <div class="head"><span class="eyebrow">Step 3</span><h2>Change how much you save</h2></div>
+    <ol class="steps">
+      <li class="step"><span class="num">1</span><div class="body">
+        <p>On the home screen, find <b>Savings Rates</b> and tap <b>Change Savings</b>.</p>
+        <div class="shot"><img src="vestwell_change.jpg" alt="Savings Rates section with Change Savings link highlighted"></div>
+      </div></li>
+      <li class="step"><span class="num">2</span><div class="body">
+        <p>On <b>Set Your Savings</b>, type the <b>percent</b> of each paycheck you want to save into the <b>Pre-Tax</b> box, the <b>Roth</b> box, or both.</p>
+        <p>Choose where it goes: <b>Pretax</b>, <b>Roth</b>, or some of each.</p>
+        <p class="hint"><b>Pretax</b> money comes out of your check before income tax is figured, so less income tax is taken from your paycheck. <b>Roth</b> money is taxed now, but comes out tax-free in retirement. More on the <b>Tips</b> page.</p>
+        <div class="shot"><img src="vestwell_setsave.jpg" alt="Set Your Savings screen with Pre-Tax and Roth boxes and Save Amounts button highlighted"></div>
+      </div></li>
+      <li class="step"><span class="num">3</span><div class="body">
+        <p>Tap <b>Save Amounts</b>. Vestwell shows your <b>Old Savings</b> next to your <b>New Savings</b>. Check it, then tap <b>Apply Changes</b>. Changed your mind? Tap <b>Cancel</b>.</p>
+        <div class="shot"><img src="vestwell_confirm.jpg" alt="Please confirm saving amounts screen with Apply Changes highlighted"></div>
+      </div></li>
+    </ol>
+    <div class="callout">
+      <p><b>When will I see it on my paycheck?</b> On your <b>very next paycheck</b>. Check it in Workforce under <b>Deductions</b> to make sure it went through.</p>
+      <p><b>Want the full company match?</b> Save at least <b>5%</b> of your pay. Anything less leaves free money on the table.</p>
+    </div>
+  </section>
+
+  <section data-views="vestwell">
+    <div class="head"><span class="eyebrow">Step 4</span><h2>Check how it's invested</h2></div>
+    <p>Your money is put into investments that can grow over time. The <b>Investment Strategy</b> section on the home screen shows which option you're using. Tap <b>Manage Investments</b> to see more or switch.</p>
+    <div class="shot"><img src="vestwell_invest.jpg" alt="Investment Strategy section with Manage Investments highlighted"></div>
+    <p>The options:</p>
+    <ul class="tour">
+      <li><b>Age-based</b><br>Picks a mix for you based on when you'll likely retire. It gets more careful as you get closer to retirement. You don't have to do anything.</li>
+      <li><b>Risk-based</b><br>You answer a few questions about how comfortable you are with ups and downs, and it picks a mix to match.</li>
+      <li><b>Goal-based</b><br>You enter your income, when you want to retire, and how much you'd like to have each year in retirement. Vestwell builds a plan around that goal and shows whether you're on track.</li>
+      <li><b>Custom</b><br>You choose the funds yourself. Best for people who already know about investing.</li>
+    </ul>
+    <p class="hint">Balances go up and down with the market. That's normal. A 401(k) is for the long run.</p>
+    <p>To switch, tap <b>Change Strategy</b> at the top of the investments screen.</p>
+    <div class="shot"><img src="vestwell_strategy.jpg" alt="Goal-Based Investment screen with Change Strategy highlighted"></div>
+  </section>
+
+  <section data-views="vestwell">
+    <div class="head"><span class="eyebrow">Step 5</span><h2>Name a beneficiary</h2></div>
+    <p>A beneficiary is the person who gets your 401(k) if you pass away. It takes 2 minutes and protects your family.</p>
+    <ol class="steps">
+      <li class="step"><span class="num">1</span><div class="body"><p>On the home screen, scroll to <b>Beneficiary</b> and tap <b>Change Beneficiary</b>, then <b>Add Beneficiary</b>.</p><div class="shot"><img src="vestwell_benef.jpg" alt="Name Your Beneficiary screen with Add Beneficiary highlighted"></div></div></li>
+      <li class="step"><span class="num">2</span><div class="body"><p>Enter their name, relationship, Social Security number, birth date and contact info. Have this handy before you start.</p></div></li>
+      <li class="step"><span class="num">3</span><div class="body"><p>If you add more than one person, split the percentages so they add up to 100%.</p></div></li>
+    </ol>
+  </section>
+
+  <section data-views="vestwell">
+    <div class="head"><span class="eyebrow">Step 6</span><h2>Find statements and plan documents</h2></div>
+    <p>In the app, tap the <b>document icon</b> at the bottom.</p>
+    <div class="shot"><img src="vestwell_docs.jpg" alt="Documents screen with the document tab highlighted"></div>
+    <ul class="checklist">
+      <li><b>Statements:</b> a report of your account every 3 months. Tap one to open it, or tap <b>Create custom statement</b> for any dates you want.</li>
+      <li><b>Plan documents:</b> tap the menu that says <b>Personal</b> and choose <b>Plan</b>. There you'll find the Summary Plan Description, the official rulebook for Paramount's plan.</li>
+    </ul>
+  </section>
+
+  <section data-views="vestwell">
+    <div class="head"><span class="eyebrow">Paramount's plan</span><h2>Know your plan</h2></div>
+    <ul class="tour">
+      <li><b>Company match</b><br>Paramount matches <b>100% of the first 3%</b> you save, plus <b>50% of the next 2%</b>. Save 5% and Paramount adds 4%.<br><span class="hint">Example: on a $1,000 paycheck, you save $50 (5%) and Paramount adds $40. That's $90 going into your account.</span><br>The match always goes into your <b>Pretax</b> account.</li>
+      <li><b>Who can join, and when</b><br>Starting <b>January 1, 2027</b>, you can join after <b>6 months</b> on the job (until then, it's 12 months). Vestwell emails you when you're eligible.</li>
+      <li><b>Vesting: when the match is fully yours</b><br>Money <b>you</b> put in is always 100% yours. The company match is <b>100% yours right away</b> too. Nothing is taken back if you leave.</li>
+      <li><b>Borrowing from your 401(k)</b><br><b>Yes, loans are allowed.</b> For the rules and how to apply, open the <b>Loan Procedures</b> document: tap the <b>document icon</b>, tap <b>Personal</b>, and choose <b>Plan</b>.</li>
+    </ul>
+  </section>
+
+  <section data-views="vestwell">
+    <div class="head"><span class="eyebrow">If you leave Paramount</span><h2>What happens to my 401(k)?</h2></div>
+    <p>It's still your money. Your usual choices are:</p>
+    <ul class="checklist">
+      <li><b>Leave it</b> in Vestwell.</li>
+      <li><b>Roll it over</b> into your new job's 401(k) or an IRA. Use <b>Withdrawals and rollovers</b> on the home screen to start.</li>
+      <li><b>Cash it out.</b> You'll usually owe taxes, plus a 10% penalty if you're under 59½. This is usually the most expensive choice.</li>
+    </ul>
+  </section>
+
+  <section data-views="vestwell">
+    <div class="card">
+      <h2 style="font-size:1.35rem">Need help?</h2>
+      <ul>
+        <li><b>Login, account or investment questions:</b> Vestwell's help chat (the <b>?</b> icon in the app) or help@vestwell.com.</li>
+        <li><b>Paycheck deduction looks wrong:</b> Talk to Zach.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="money" data-views="money">
+    <div class="head">
+      <span class="eyebrow">Money basics</span>
+      <h2>Make your paycheck go further</h2>
+      <p class="lede">A few simple habits that help you handle surprises, get out of debt, and build real savings over time.</p>
+    </div>
+  </section>
+
+  <section data-views="money">
+    <div class="head"><span class="eyebrow">Where to start</span><h2>Do these in order</h2></div>
+    <p>If you're not sure what to do first, work down this list. Each step makes the next one easier.</p>
+    <ol class="steps">
+      <li class="step"><span class="num">1</span><div class="body"><p><b>Save a small cushion.</b> Get $500 to $1,000 into savings for surprises like a flat tire or a doctor's bill.</p></div></li>
+      <li class="step"><span class="num">2</span><div class="body"><p><b>Get the full company match.</b> Put at least 5% of your pay into your 401(k) so Paramount adds its full 4%.</p></div></li>
+      <li class="step"><span class="num">3</span><div class="body"><p><b>Pay off high-interest debt.</b> Credit cards and payday loans first.</p></div></li>
+      <li class="step"><span class="num">4</span><div class="body"><p><b>Grow your cushion.</b> Work up to 3 months of living costs in savings.</p></div></li>
+      <li class="step"><span class="num">5</span><div class="body"><p><b>Save more for retirement.</b> Each time you get a raise, bump your 401(k) up by 1%.</p></div></li>
+    </ol>
+  </section>
+
+  <section data-views="money">
+    <div class="head"><span class="eyebrow">Your paycheck</span><h2>Know where your money goes</h2></div>
+    <p>You can't steer money you can't see. For one month, write down everything you spend, or check your bank app at the end of each week.</p>
+    <p>A simple way to split your take-home pay:</p>
+    <ul class="tour">
+      <li><b>About half: needs</b><br>Rent, utilities, groceries, gas, insurance, minimum debt payments.</li>
+      <li><b>About a third: wants</b><br>Eating out, streaming, hobbies, going out.</li>
+      <li><b>At least a fifth: your future</b><br>Savings and paying down debt faster.</li>
+    </ul>
+    <p class="hint">These are starting points, not rules. If needs take more than half right now, that's common. Start with whatever you can save and build from there.</p>
+  </section>
+
+  <section data-views="money">
+    <div class="head"><span class="eyebrow">Step 1 and 4</span><h2>Build an emergency fund</h2></div>
+    <p>An emergency fund is money set aside only for surprises. It keeps one bad week from turning into credit card debt or a payday loan.</p>
+    <ul class="checklist">
+      <li><b>Keep it separate</b> from your everyday checking, so you aren't tempted to spend it. A savings account at your bank works.</li>
+      <li><b>Make it automatic.</b> Set up a transfer from checking to savings on payday. Even $20 a week adds up to over $1,000 in a year.</li>
+      <li><b>Refill it</b> after you use it.</li>
+    </ul>
+    <div class="callout"><p><b>What counts as an emergency?</b> Something you didn't plan for and can't skip: a car repair you need to get to work, a medical bill, a lost week of hours. A sale is not an emergency.</p></div>
+  </section>
+
+  <section data-views="money">
+    <div class="head"><span class="eyebrow">Step 2</span><h2>Never skip the free money</h2></div>
+    <p>Paramount matches <b>100% of the first 3%</b> you save in your 401(k), plus <b>50% of the next 2%</b>. Save 5% and Paramount adds 4%. That's an instant 80% return on your money, which you won't find anywhere else.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>You save</th><th>Paramount adds</th><th>Total going in</th></tr></thead>
+      <tbody>
+        <tr><td>1%</td><td>1%</td><td>2%</td></tr>
+        <tr><td>3%</td><td>3%</td><td>6%</td></tr>
+        <tr><td>5%</td><td>4%</td><td><b>9%</b></td></tr>
+        <tr><td>8%</td><td>4%</td><td>12%</td></tr>
+      </tbody>
+    </table></div>
+    <p class="hint">Above 5%, the match stays at 4%, but everything you add still grows for you. See the <b>Vestwell</b> page to change how much you save.</p>
+  </section>
+
+  <section data-views="money">
+    <div class="head"><span class="eyebrow">Time is your best tool</span><h2>Start early, even if it's small</h2></div>
+    <p>Money in your 401(k) earns growth, and then that growth earns growth too. The longer it sits, the faster it grows.</p>
+    <div class="card">
+      <p><b>Example:</b> You earn $800 a week and save 5% ($40). Paramount adds 4% ($32). That's $72 a week going in.</p>
+      <ul>
+        <li><b>Start at 25,</b> keep it up until 65: about <b>$625,000</b>. You put in about $150,000 of that, counting the match.</li>
+        <li><b>Start at 35</b> instead: about <b>$315,000</b>. Waiting 10 years cuts it in half.</li>
+      </ul>
+      <p class="hint">Assumes 6% average growth per year. Real returns go up and down and aren't guaranteed, and this doesn't count raises.</p>
+    </div>
+  </section>
+
+  <section data-views="money">
+    <div class="head"><span class="eyebrow">Pretax or Roth</span><h2>A good rule for starting out</h2></div>
+    <p>If you're early in your career or earning less now than you expect to later, <b>Roth</b> is often a smart pick. You pay tax now, at a lower rate, and take it out tax-free in retirement.</p>
+    <p>If you need every dollar of your paycheck today, <b>Pretax</b> lowers the tax taken out of each check. Either one is far better than not saving. More on the <b>Tips</b> page.</p>
+  </section>
+
+  <section data-views="money">
+    <div class="head"><span class="eyebrow">Step 3</span><h2>Get out of high-interest debt</h2></div>
+    <p>Credit cards often charge 20% or more a year. Paying one off is like earning 20% on your money, guaranteed.</p>
+    <ul class="checklist">
+      <li><b>Always pay at least the minimum</b> on everything, on time. Late fees and missed payments hurt fast.</li>
+      <li><b>Put extra toward one debt at a time.</b> Either the highest interest rate first (saves the most money) or the smallest balance first (quick wins keep you going).</li>
+      <li><b>Avoid payday loans and title loans.</b> Their fees often work out to several hundred percent a year.</li>
+      <li><b>Paying with a card?</b> Treat it like a debit card and pay the full balance every month.</li>
+    </ul>
+  </section>
+
+  <section data-views="money">
+    <div class="head"><span class="eyebrow">Your credit score</span><h2>Why it matters and how to raise it</h2></div>
+    <p>Your credit score affects the interest rate you get on a car, a house, and sometimes even renting an apartment. A higher score can save you thousands.</p>
+    <ul class="checklist">
+      <li><b>Pay every bill on time.</b> This matters more than anything else.</li>
+      <li><b>Keep card balances low,</b> ideally under 30% of your limit.</li>
+      <li><b>Keep old cards open</b> if they don't charge a yearly fee. A longer history helps.</li>
+      <li><b>Check your reports for free</b> at annualcreditreport.com, the official free site. Dispute anything that isn't yours.</li>
+    </ul>
+  </section>
+
+  <section data-views="money">
+    <div class="head"><span class="eyebrow">Your 401(k)</span><h2>Leave it alone until retirement</h2></div>
+    <p>It can be tempting to borrow from your 401(k) or cash it out when you change jobs. Both cost more than they look.</p>
+    <ul class="checklist">
+      <li><b>Cashing out</b> usually means paying income tax plus a 10% penalty if you're under 59½, and losing all the future growth.</li>
+      <li><b>A 401(k) loan</b> has to be paid back, and the money isn't growing while it's out. If you leave Paramount with a loan, you may have to repay it quickly or owe taxes on it.</li>
+      <li><b>Changing jobs?</b> Roll it into your new 401(k) or an IRA instead of cashing out.</li>
+    </ul>
+    <div class="callout"><p><b>This is why the emergency fund comes first.</b> With savings to fall back on, you won't need to touch your retirement money.</p></div>
+  </section>
+
+  <section data-views="money">
+    <div class="head"><span class="eyebrow">Taxes</span><h2>Your W-4 and your refund</h2></div>
+    <p>Your <b>W-4</b> tells payroll how much tax to take from each paycheck. A big refund in the spring feels nice, but it's your own money that you lent the government for free all year.</p>
+    <ul class="checklist">
+      <li><b>Update your W-4</b> after big life changes: getting married or divorced, having a baby, or a second job.</li>
+      <li><b>Owed a lot last year?</b> You may need more taken out. <b>Got a huge refund?</b> You may be able to take home more each paycheck.</li>
+      <li>The IRS has a free <b>Tax Withholding Estimator</b> at irs.gov that tells you what to put on your W-4.</li>
+    </ul>
+  </section>
+
+  <section data-views="money">
+    <div class="card">
+      <h2 style="font-size:1.35rem">Need help?</h2>
+      <ul>
+        <li><b>Questions about your paycheck, W-4 or 401(k) setup:</b> Talk to Zach.</li>
+        <li><b>Questions about your 401(k) account or investments:</b> Vestwell's help chat (the <b>?</b> icon in the app).</li>
+      </ul>
+      <p class="hint">This page is general information to help you get started, not personal financial or tax advice.</p>
+    </div>
+  </section>
+
+  <section id="tips" data-views="tips" role="tabpanel" aria-labelledby="tab-tips">
+    <div class="head">
+      <span class="eyebrow">Tips</span>
+      <h2>Good to know</h2>
+      <p class="lede">How your 401(k) accounts work, plus answers to common questions.</p>
+    </div>
+    <div class="tip-list" id="tip-list"></div>
+    <div class="ask" id="ask-box">
+      <h3>Still have a question?</h3>
+      <p>Send it to Zach. Just your name and your question, no login needed.</p>
+      <a class="ask-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdoxVQA99gEHnJsyi5coC6ojY0OJjAPFulrJlo5sxMMeyoMVA/viewform" target="_blank" rel="noopener">Ask Zach a question</a>
+    </div>
+  </section>
+</main>
+<script type="application/json" id="tips-data">[
+ {
+  "title": "Traditional (Pretax) 401(k)",
+  "body": "Your money goes in \u003cb>before\u003c/b> income tax is taken out, so you pay less tax on each paycheck today. You pay income tax later, when you take the money out in retirement.\u003cbr>\u003cbr>On your paycheck it shows as \u003cb>Pretax 401k\u003c/b>."
+ },
+ {
+  "title": "Roth 401(k)",
+  "body": "Your money goes in \u003cb>after\u003c/b> income tax is taken out, so it doesn't lower your taxes today. When you take it out in retirement, it comes out \u003cb>tax-free\u003c/b>, growth included, as long as you're at least 59½ and the account is at least 5 years old.\u003cbr>\u003cbr>On your paycheck it shows as \u003cb>Roth 401k\u003c/b>."
+ },
+ {
+  "title": "Pretax or Roth: Which is better?",
+  "body": "It depends on your situation.\u003cbr>\u003cbr>\u003cb>Pretax\u003c/b> usually helps more if you expect to pay a lower tax rate in retirement than you do now.\u003cbr>\u003cb>Roth\u003c/b> usually helps more if you expect your tax rate to be the same or higher later."
+ },
+ {
+  "title": "The Company Match",
+  "body": "Paramount's match is extra money the company adds on top of what you put in. It shows under \u003cb>Employer Contributions\u003c/b> on your paycheck.\u003cbr>\u003cbr>The match always goes into your \u003cb>Pretax 401k\u003c/b> account, even if you chose Roth for your own money."
+ },
+ {
+  "title": "How much can I put in each year?",
+  "body": "For 2026, you can put in up to \u003cb>$24,500\u003c/b> of your own money (Pretax and Roth combined).\u003cbr>\u003cbr>The company match doesn't count toward your $24,500. The IRS updates these limits most years."
+ },
+ {
+  "title": "What does Year-to-date (YTD) mean?",
+  "body": "Everything since \u003cb>January 1\u003c/b> of this year. It starts over at zero every new year."
+ },
+ {
+  "title": "Use your latest paycheck",
+  "body": "Any paycheck works, but your \u003cb>latest paycheck\u003c/b> always has the most up-to-date year totals."
+ },
+ {
+  "title": "Need help?",
+  "body": "Numbers look wrong, or you still can't sign in? Talk to Zach."
+ }
+]</script>
+<script id="router-script">
+(function(){
+  var VIEWS = ['home', 'pto', 'retirement', 'vestwell', 'money', 'tips'];
+  function current(){
+    var h = (location.hash || '').replace('#', '');
+    if (VIEWS.indexOf(h) >= 0) return h;
+    try { var s = (sessionStorage.getItem('guide-view') || '').replace('#', ''); sessionStorage.removeItem('guide-view'); if (VIEWS.indexOf(s) >= 0) return s; } catch (e) {}
+    return 'home';
+  }
+  function show(v, scroll){
+    document.querySelectorAll('[data-views]').forEach(function(s){ s.hidden = s.getAttribute('data-views').split(' ').indexOf(v) < 0; });
+    var h1 = document.querySelector('.home h1'), tt = document.getElementById('topbar-title');
+    if (h1 && tt) tt.textContent = h1.textContent;
+    if (scroll) window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', function(){ show(current(), true); });
+  show(current(), false);
+})();
+</script>
+<script id="editor-script">
+(function(){
+  var SEL = 'h1, .lede, .eyebrow, main h2, main > section > p, .body p, .callout p, .key p, .tile-title, .tile-desc, .tour li, .checklist li, .card li, .flow b, .flow span.d, .card > p, th, td';
+  var main = document.querySelector('main');
+  if (!main) return;
+  var nodes = Array.prototype.slice.call(main.querySelectorAll(SEL));
+  nodes.forEach(function(n, i){ n.setAttribute('data-k', String(i)); });
+  var pristine = main.cloneNode(true);
+  var tipList = document.getElementById('tip-list');
+  var tips = [];
+  try { tips = JSON.parse(document.getElementById('tips-data').textContent) || []; } catch (e) { tips = []; }
+  var artifact = null, editing = false, saved = {}, canEditPage = false;
+
+  function clean(html){
+    var t = document.createElement('template'); t.innerHTML = html;
+    (function walk(el){
+      Array.prototype.slice.call(el.childNodes).forEach(function(c){
+        if (c.nodeType === 1) {
+          walk(c);
+          var tag = c.tagName.toLowerCase();
+          if (tag === 'b' || tag === 'strong') { var b = document.createElement('b'); while (c.firstChild) b.appendChild(c.firstChild); c.replaceWith(b); }
+          else if (tag === 'br') { c.replaceWith(document.createElement('br')); }
+          else if (tag === 'code') { var k = document.createElement('code'); k.textContent = c.textContent; c.replaceWith(k); }
+          else if (tag === 'div' || tag === 'p') { var f = document.createDocumentFragment(); f.appendChild(document.createElement('br')); while (c.firstChild) f.appendChild(c.firstChild); c.replaceWith(f); }
+          else { var g = document.createDocumentFragment(); while (c.firstChild) g.appendChild(c.firstChild); c.replaceWith(g); }
+        } else if (c.nodeType !== 3) { c.remove(); }
+      });
+    })(t.content);
+    var d = document.createElement('div'); d.appendChild(t.content);
+    return d.innerHTML.replace(/^(\s*<br>)+/, '').replace(/(<br>\s*)+$/, '').trim();
+  }
+
+  function renderTips(){
+    tipList.innerHTML = '';
+    if (!tips.length && !editing) {
+      var e = document.createElement('p'); e.className = 'tip-empty'; e.textContent = 'No tips yet.'; tipList.appendChild(e);
+    }
+    tips.forEach(function(tp, i){
+      var a = document.createElement('article'); a.className = 'tip';
+      var h = document.createElement('h3'); h.innerHTML = tp.title || '';
+      var b = document.createElement('div'); b.className = 'tip-body'; b.innerHTML = tp.body || '';
+      a.append(h, b);
+      if (editing) {
+        h.setAttribute('contenteditable', 'true'); b.setAttribute('contenteditable', 'true');
+        var tools = document.createElement('div'); tools.className = 'tip-tools';
+        var rm = document.createElement('button'); rm.type = 'button'; rm.textContent = 'Remove';
+        rm.addEventListener('click', function(){ tips = readTips(); tips.splice(i, 1); renderTips(); });
+        tools.appendChild(rm); a.appendChild(tools);
+      }
+      tipList.appendChild(a);
+    });
+    if (editing || canEditPage) {
+      var add = document.createElement('button'); add.type = 'button'; add.className = 'add-tip'; add.textContent = '+ Add a question & answer';
+      add.addEventListener('click', function(){
+        if (!editing) setEditing(true);
+        tips = readTips(); tips.push({title: '', body: ''}); renderTips();
+        var last = tipList.querySelectorAll('.tip h3'); if (last.length) { last[last.length - 1].scrollIntoView({block: 'center'}); last[last.length - 1].focus(); }
+      });
+      tipList.appendChild(add);
+    }
+  }
+
+  function readTips(){
+    return Array.prototype.slice.call(tipList.querySelectorAll('.tip')).map(function(a){
+      return { title: clean(a.querySelector('h3').innerHTML), body: clean(a.querySelector('.tip-body').innerHTML) };
+    });
+  }
+
+  function buildDoc(tipState){
+    var out = pristine.cloneNode(true);
+    nodes.forEach(function(n, i){
+      var target = out.querySelector('[data-k="' + i + '"]');
+      if (target) target.innerHTML = clean(n.innerHTML);
+    });
+    out.querySelectorAll('[data-k]').forEach(function(n){ n.removeAttribute('data-k'); });
+    out.querySelectorAll('[hidden]').forEach(function(n){ n.removeAttribute('hidden'); });
+        var json = JSON.stringify(tipState.filter(function(t){ return t.title || t.body; }), null, 1).replace(/</g, '\\u003c');
+    var parts = ['title', 'meta[name="claude:viewport-fit-sides"]', 'link[rel="stylesheet"]', '#page-style', '#tabs-style', '#vestwell-style', '#editor-style']
+      .map(function(s){ var e = document.querySelector(s); return e ? e.outerHTML : ''; }).join('\n');
+    var router = document.getElementById('router-script');
+    var script = document.getElementById('editor-script');
+    return '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>\n'
+      + parts + '\n\n' + out.outerHTML + '\n<script type="application/json" id="tips-data">' + json + '<\/script>\n'
+      + router.outerHTML + '\n' + script.outerHTML + '\n';
+  }
+
+  renderTips();
+
+  var bar = document.createElement('div'); bar.className = 'edit-bar'; bar.hidden = true;
+  var msg = document.createElement('div'); msg.className = 'edit-msg'; msg.hidden = true; msg.setAttribute('role', 'status');
+  var btnEdit = document.createElement('button'); btnEdit.type = 'button'; btnEdit.id = 'btn-edit'; btnEdit.textContent = 'Edit text';
+  var btnCancel = document.createElement('button'); btnCancel.type = 'button'; btnCancel.id = 'btn-cancel'; btnCancel.textContent = 'Cancel'; btnCancel.hidden = true;
+  var btnSave = document.createElement('button'); btnSave.type = 'button'; btnSave.id = 'btn-save'; btnSave.className = 'primary'; btnSave.textContent = 'Save changes'; btnSave.hidden = true;
+  bar.append(msg, btnCancel, btnSave, btnEdit);
+  document.body.appendChild(bar);
+
+  function say(t){ msg.textContent = t; msg.hidden = !t; }
+  var savedTips = [];
+
+  function setEditing(on){
+    editing = on;
+    document.body.classList.toggle('editing', on);
+    nodes.forEach(function(n){ if (on) n.setAttribute('contenteditable', 'true'); else n.removeAttribute('contenteditable'); });
+    btnEdit.hidden = on; btnSave.hidden = !on; btnCancel.hidden = !on;
+    say(on ? 'Tap any text to change it. Ctrl/Cmd+B makes text bold. On the home screen, tap a topic\'s arrow to open it. On Tips you can add or remove questions.' : '');
+    if (on) { nodes.forEach(function(n, i){ saved[i] = n.innerHTML; }); savedTips = JSON.parse(JSON.stringify(tips)); }
+    renderTips();
+  }
+
+  main.addEventListener('click', function(e){
+    if (editing && e.target.closest('.tile [contenteditable]')) e.preventDefault();
+  });
+  main.addEventListener('paste', function(e){
+    if (!editing) return;
+    e.preventDefault();
+    var text = (e.clipboardData || window.clipboardData).getData('text/plain');
+    document.execCommand('insertText', false, text);
+  });
+
+  btnEdit.addEventListener('click', function(){ setEditing(true); });
+  btnCancel.addEventListener('click', function(){
+    nodes.forEach(function(n, i){ n.innerHTML = saved[i]; });
+    tips = savedTips;
+    setEditing(false);
+  });
+  btnSave.addEventListener('click', function(){
+    btnSave.disabled = true; btnCancel.disabled = true; say('Saving...');
+    try { sessionStorage.setItem('guide-view', location.hash || ''); } catch (e) {}
+    artifact.publish(buildDoc(readTips())).then(function(){
+      say('Saved.');
+    }).catch(function(err){
+      var code = err && err.code;
+      btnSave.disabled = false; btnCancel.disabled = false;
+      if (code === 'conflict') { say('Someone else saved a newer version. Loading it now.'); }
+      else if (code === 'not_writer' || code === 'not_granted' || code === 'not_declared' || code === 'capability_disabled' || code === 'consent_required') {
+        say('This view is read-only, so changes can\'t be saved here.'); btnSave.hidden = true;
+      } else if (code === 'too_large') { say('The page is too large to save.'); }
+      else if (code === 'rate_limited') { say('Saving too often. Wait a minute and try again.'); }
+      else { say('Couldn\'t save just now. Try again in a moment.'); }
+    });
+  });
+
+  if (window.claude && window.claude.use) {
+    Promise.all([window.claude.use('artifact'), window.claude.use('user')]).then(function(r){
+      artifact = r[0]; var user = r[1];
+      if (!artifact || !user) return;
+      return user.canEdit().then(function(ok){ if (ok) { bar.hidden = false; canEditPage = true; if (!editing) renderTips(); } });
+    }).catch(function(){});
+  }
+})();
+</script>
+
+</body></html>
