@@ -54,10 +54,6 @@ code{font-family:var(--body); font-weight:700; background:var(--surface); border
 .card ul{margin:0; padding-left:20px; display:flex; flex-direction:column; gap:8px}
 </style>
 <style id="tabs-style">
-.ask{margin-top:8px; background:var(--accent-soft); border:1px solid var(--accent); border-radius:16px; padding:18px; display:flex; flex-direction:column; gap:10px}
-.ask h3{font-family:var(--display); font-size:1.35rem; margin:0}
-.ask-btn{display:block; text-align:center; background:var(--accent); color:var(--bg); font-weight:700; text-decoration:none; padding:14px 18px; border-radius:12px}
-.ask-btn:focus-visible{outline:3px solid var(--mark); outline-offset:2px}
 .home{display:flex; flex-direction:column; gap:14px; padding-top:12px}
 .home h1{font-size:2.6rem}
 .home .lede{margin-top:0; font-size:1.05rem}
@@ -97,6 +93,23 @@ body.editing .tip h3, body.editing .tip-body{outline:2px dashed var(--line); out
 body.editing .tip h3:focus, body.editing .tip-body:focus{outline:2px solid var(--mark)}
 .tip h3:empty::before{content:"Question"; color:var(--muted)}
 .tip-body:empty::before{content:"Answer"; color:var(--muted)}
+
+.ask{margin-top:8px; background:var(--accent-soft); border:1px solid var(--accent); border-radius:16px; padding:18px; display:flex; flex-direction:column; gap:10px}
+.ask h3{font-family:var(--display); font-size:1.35rem; margin:0}
+.ask-btn{display:block; text-align:center; background:var(--accent); color:var(--bg); font-weight:700; text-decoration:none; padding:14px 18px; border-radius:12px}
+.ask-btn:focus-visible{outline:3px solid var(--mark); outline-offset:2px}
+</style>
+<style id="vestwell-style">
+.flow{display:grid;grid-template-columns:1fr;gap:10px}
+.flow .box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center}
+.flow .ic{width:44px;height:44px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:1.2rem}
+.flow .arrow{text-align:center;color:var(--muted);font-size:1.3rem;line-height:1}
+.flow b{display:block;font-family:var(--display);font-size:1.2rem}
+.flow span.d{color:var(--muted);font-size:.95rem}
+.tour{display:flex;flex-direction:column;gap:10px;margin:0;padding:0;list-style:none}
+.tour li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.tour li b{font-family:var(--display);font-size:1.12rem}
+.checklist{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px}
 </style>
 <style id="editor-style">
 .edit-bar{position:fixed; right:max(16px, env(safe-area-inset-right, 0px)); bottom:calc(16px + env(safe-area-inset-bottom, 0px)); z-index:20; display:flex; gap:8px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
@@ -127,6 +140,11 @@ body.editing p[data-k]:empty{display:block; min-height:1.4em}
         <span class="tile-text"><span class="tile-title">401(k)</span><span class="tile-desc">What am I putting in, and what is the company match?</span></span>
         <span class="tile-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"></path></svg></span>
       </a>
+      <a class="tile" href="#vestwell" data-view="vestwell">
+        <span class="tile-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="3"></ellipse><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"></path><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"></path></svg></span>
+        <span class="tile-text"><span class="tile-title">Vestwell</span><span class="tile-desc">Check your balance, change how much you save, and pick investments.</span></span>
+        <span class="tile-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"></path></svg></span>
+      </a>
       <a class="tile" href="#tips" data-view="tips">
         <span class="tile-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4"></path><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"></path></svg></span>
         <span class="tile-text"><span class="tile-title">Tips</span><span class="tile-desc">Frequently Asked Questions</span></span>
@@ -135,7 +153,7 @@ body.editing p[data-k]:empty{display:block; min-height:1.4em}
     </nav>
   </header>
 
-  <div class="topbar" data-views="pto retirement tips">
+  <div class="topbar" data-views="pto retirement vestwell tips">
     <a class="back" href="#home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>Home</a>
     <span class="topbar-title" id="topbar-title">Know Your Finances</span>
   </div>
@@ -217,6 +235,159 @@ body.editing p[data-k]:empty{display:block; min-height:1.4em}
     </div>
   </section>
 
+
+  <section id="vestwell" data-views="vestwell">
+    <div class="head">
+      <span class="eyebrow">401(k) in Vestwell</span>
+      <h2>Your 401(k) in Vestwell</h2>
+      <p class="lede">Where your 401(k) money lives, how to check it, and how to change what you put in.</p>
+    </div>
+  </section>
+
+
+  <section data-views="vestwell">
+    <div class="head"><span class="eyebrow">The basics</span><h2>Where does my 401(k) money go?</h2></div>
+    <p>Two places handle your 401(k).</p>
+    <div class="flow">
+      <div class="box"><span class="ic">1</span><div><b>Your paycheck (QuickBooks Workforce)</b><span class="d">Takes your 401(k) money out of each check and sends it to Vestwell.</span></div></div>
+      <div class="arrow">↓</div>
+      <div class="box"><span class="ic">2</span><div><b>Vestwell</b><span class="d">Your 401(k) account. It holds your money, and it's where you see your balance, change how much you save, and pick investments.</span></div></div>
+    </div>
+    <div class="callout"><p><b>Rule of thumb:</b> Workforce shows what came out of your paycheck. Vestwell shows what's in your account and is where you make changes.</p></div>
+  </section>
+
+  <section data-views="vestwell">
+    <div class="head"><span class="eyebrow">Step 1</span><h2>Get into your account</h2></div>
+    <ol class="steps">
+      <li class="step"><span class="num">1</span><div class="body">
+        <p>Download the <b>Vestwell</b> app from the App Store (iPhone) or Google Play (Android). You can also use <b>vestwell.com</b> on a computer.</p>
+      </div></li>
+      <li class="step"><span class="num">2</span><div class="body">
+        <p><b>First time?</b> Once you're eligible, Vestwell sends you a welcome email. Follow its link to create your login. You're eligible after <b>6 months</b> on the job.</p>
+      </div></li>
+      <li class="step"><span class="num">3</span><div class="body">
+        <p>Tap <b>Sign In</b> and enter your email and password. Vestwell will text or email you a code to finish signing in.</p>
+        <p class="hint">Tip: turn on Face ID or fingerprint sign-in when the app offers it, so you don't need your password every time.</p>
+      </div></li>
+    </ol>
+  </section>
+
+  <section data-views="vestwell">
+    <div class="head"><span class="eyebrow">Step 2</span><h2>Your home screen, explained</h2></div>
+    <p>After you sign in, you land on <b>Retirement Overview</b>. Here's what each part means.</p>
+    <div class="shot"><img src="vestwell_home.jpg" alt="Vestwell Retirement Overview screen showing Retirement Savings and the Withdrawals and Rollovers button"></div>
+    <p>The buttons along the <b>bottom</b> of the app:</p>
+    <div class="shot"><img src="vestwell_tabs.jpg" alt="Vestwell bottom menu: home, piggy bank, chart, document, person icons"></div>
+    <ul class="tour">
+      <li><b>House</b> Home (Retirement Overview).</li>
+      <li><b>Piggy bank</b> Account details: your balance split into Pretax, Roth and company money.</li>
+      <li><b>Chart</b> Investments: what you own and how it's grown.</li>
+      <li><b>Document</b> Statements and plan documents.</li>
+      <li><b>Person</b> Your profile: address, phone, email.</li>
+    </ul>
+    <ul class="tour">
+      <li><b>Retirement Savings</b><br>How much is in your account right now, and a chart of how it's grown.</li>
+      <li><b>Savings Rates</b><br>How much comes out of each paycheck, and whether it goes to Pretax, Roth, or both. This is where you make changes.</li>
+      <li><b>Investment Strategy</b><br>How your money is invested.</li>
+      <li><b>Beneficiary</b><br>Who gets your account if something happens to you.</li>
+      <li><b>Recent Activity</b><br>Every deposit into your account. <b>Saver Contribution</b> is your money (it says Pretax or Roth under it). <b>Employer Contribution</b> is Paramount's match. <b>Pending</b> means it's from your latest paycheck and is still on its way.</li>
+      <li><b>My 2026 Contributions</b><br>How much you've put in this year, with a bar showing how close you are to the yearly IRS limit ($24,500 in 2026).</li>
+      <li><b>Withdrawals &amp; Rollovers</b><br>For taking money out, or moving a 401(k) from another job. Most people won't touch this until they leave or retire.</li>
+    </ul>
+    <p>Here's what <b>Recent Activity</b> looks like. Each paycheck adds two lines: your money and Paramount's match.</p>
+    <div class="shot"><img src="vestwell_activity.jpg" alt="Recent Activity list showing Saver Contribution (Roth) and Employer Contribution lines"></div>
+  </section>
+
+  <section data-views="vestwell">
+    <div class="head"><span class="eyebrow">Step 3</span><h2>Change how much you save</h2></div>
+    <ol class="steps">
+      <li class="step"><span class="num">1</span><div class="body">
+        <p>On the home screen, find <b>Savings Rates</b> and tap <b>Change Savings</b>.</p>
+        <div class="shot"><img src="vestwell_change.jpg" alt="Savings Rates section with Change Savings link highlighted"></div>
+      </div></li>
+      <li class="step"><span class="num">2</span><div class="body">
+        <p>On <b>Set Your Savings</b>, type the <b>percent</b> of each paycheck you want to save into the <b>Pre-Tax</b> box, the <b>Roth</b> box, or both.</p>
+        <p>Choose where it goes: <b>Pretax</b>, <b>Roth</b>, or some of each.</p>
+        <p class="hint"><b>Pretax</b> money comes out of your check before income tax is figured, so less income tax is taken from your paycheck. <b>Roth</b> money is taxed now, but comes out tax-free in retirement. More on the <b>Tips</b> page.</p>
+        <div class="shot"><img src="vestwell_setsave.jpg" alt="Set Your Savings screen with Pre-Tax and Roth boxes and Save Amounts button highlighted"></div>
+      </div></li>
+      <li class="step"><span class="num">3</span><div class="body">
+        <p>Tap <b>Save Amounts</b>. Vestwell shows your <b>Old Savings</b> next to your <b>New Savings</b>. Check it, then tap <b>Apply Changes</b>. Changed your mind? Tap <b>Cancel</b>.</p>
+        <div class="shot"><img src="vestwell_confirm.jpg" alt="Please confirm saving amounts screen with Apply Changes highlighted"></div>
+      </div></li>
+    </ol>
+    <div class="callout">
+      <p><b>When will I see it on my paycheck?</b> On your <b>very next paycheck</b>. Check it in Workforce under <b>Deductions</b> to make sure it went through.</p>
+      <p><b>Want the full company match?</b> Save at least <b>5%</b> of your pay. Anything less leaves free money on the table.</p>
+    </div>
+  </section>
+
+  <section data-views="vestwell">
+    <div class="head"><span class="eyebrow">Step 4</span><h2>Check how it's invested</h2></div>
+    <p>Your money is put into investments that can grow over time. The <b>Investment Strategy</b> section on the home screen shows which option you're using. Tap <b>Manage Investments</b> to see more or switch.</p>
+    <div class="shot"><img src="vestwell_invest.jpg" alt="Investment Strategy section with Manage Investments highlighted"></div>
+    <p>The options:</p>
+    <ul class="tour">
+      <li><b>Age-based</b><br>Picks a mix for you based on when you'll likely retire. It gets more careful as you get closer to retirement. You don't have to do anything.</li>
+      <li><b>Risk-based</b><br>You answer a few questions about how comfortable you are with ups and downs, and it picks a mix to match.</li>
+      <li><b>Goal-based</b><br>You enter your income, when you want to retire, and how much you'd like to have each year in retirement. Vestwell builds a plan around that goal and shows whether you're on track.</li>
+      <li><b>Custom</b><br>You choose the funds yourself. Best for people who already know about investing.</li>
+    </ul>
+    <p class="hint">Balances go up and down with the market. That's normal. A 401(k) is for the long run.</p>
+    <p>To switch, tap <b>Change Strategy</b> at the top of the investments screen.</p>
+    <div class="shot"><img src="vestwell_strategy.jpg" alt="Goal-Based Investment screen with Change Strategy highlighted"></div>
+  </section>
+
+  <section data-views="vestwell">
+    <div class="head"><span class="eyebrow">Step 5</span><h2>Name a beneficiary</h2></div>
+    <p>A beneficiary is the person who gets your 401(k) if you pass away. It takes 2 minutes and protects your family.</p>
+    <ol class="steps">
+      <li class="step"><span class="num">1</span><div class="body"><p>On the home screen, scroll to <b>Beneficiary</b> and tap <b>Change Beneficiary</b>, then <b>Add Beneficiary</b>.</p><div class="shot"><img src="vestwell_benef.jpg" alt="Name Your Beneficiary screen with Add Beneficiary highlighted"></div></div></li>
+      <li class="step"><span class="num">2</span><div class="body"><p>Enter their name, relationship, Social Security number, birth date and contact info. Have this handy before you start.</p></div></li>
+      <li class="step"><span class="num">3</span><div class="body"><p>If you add more than one person, split the percentages so they add up to 100%.</p></div></li>
+    </ol>
+  </section>
+
+  <section data-views="vestwell">
+    <div class="head"><span class="eyebrow">Step 6</span><h2>Find statements and plan documents</h2></div>
+    <p>In the app, tap the <b>document icon</b> at the bottom.</p>
+    <div class="shot"><img src="vestwell_docs.jpg" alt="Documents screen with the document tab highlighted"></div>
+    <ul class="checklist">
+      <li><b>Statements:</b> a report of your account every 3 months. Tap one to open it, or tap <b>Create custom statement</b> for any dates you want.</li>
+      <li><b>Plan documents:</b> tap the menu that says <b>Personal</b> and choose <b>Plan</b>. There you'll find the Summary Plan Description, the official rulebook for Paramount's plan.</li>
+    </ul>
+  </section>
+
+  <section data-views="vestwell">
+    <div class="head"><span class="eyebrow">Paramount's plan</span><h2>Know your plan</h2></div>
+    <ul class="tour">
+      <li><b>Company match</b><br>Paramount matches <b>100% of the first 3%</b> you save, plus <b>50% of the next 2%</b>. Save 5% and Paramount adds 4%.<br><span class="hint">Example: on a $1,000 paycheck, you save $50 (5%) and Paramount adds $40. That's $90 going into your account.</span><br>The match always goes into your <b>Pretax</b> account.</li>
+      <li><b>Who can join, and when</b><br>Starting <b>January 1, 2027</b>, you can join after <b>6 months</b> on the job (until then, it's 12 months). Vestwell emails you when you're eligible.</li>
+      <li><b>Vesting: when the match is fully yours</b><br>Money <b>you</b> put in is always 100% yours. The company match is <b>100% yours right away</b> too. Nothing is taken back if you leave.</li>
+      <li><b>Borrowing from your 401(k)</b><br><b>Yes, loans are allowed.</b> For the rules and how to apply, open the <b>Loan Procedures</b> document: tap the <b>document icon</b>, tap <b>Personal</b>, and choose <b>Plan</b>.</li>
+    </ul>
+  </section>
+
+  <section data-views="vestwell">
+    <div class="head"><span class="eyebrow">If you leave Paramount</span><h2>What happens to my 401(k)?</h2></div>
+    <p>It's still your money. Your usual choices are:</p>
+    <ul class="checklist">
+      <li><b>Leave it</b> in Vestwell.</li>
+      <li><b>Roll it over</b> into your new job's 401(k) or an IRA. Use <b>Withdrawals and rollovers</b> on the home screen to start.</li>
+      <li><b>Cash it out.</b> You'll usually owe taxes, plus a 10% penalty if you're under 59½. This is usually the most expensive choice.</li>
+    </ul>
+  </section>
+
+  <section data-views="vestwell">
+    <div class="card">
+      <h2 style="font-size:1.35rem">Need help?</h2>
+      <ul>
+        <li><b>Login, account or investment questions:</b> Vestwell's help chat (the <b>?</b> icon in the app) or help@vestwell.com.</li>
+        <li><b>Paycheck deduction looks wrong:</b> Talk to Zach.</li>
+      </ul>
+    </div>
+  </section>
+
   <section id="tips" data-views="tips" role="tabpanel" aria-labelledby="tab-tips">
     <div class="head">
       <span class="eyebrow">Tips</span>
@@ -267,7 +438,7 @@ body.editing p[data-k]:empty{display:block; min-height:1.4em}
 ]</script>
 <script id="router-script">
 (function(){
-  var VIEWS = ['home', 'pto', 'retirement', 'tips'];
+  var VIEWS = ['home', 'pto', 'retirement', 'vestwell', 'tips'];
   function current(){
     var h = (location.hash || '').replace('#', '');
     if (VIEWS.indexOf(h) >= 0) return h;
@@ -286,7 +457,7 @@ body.editing p[data-k]:empty{display:block; min-height:1.4em}
 </script>
 <script id="editor-script">
 (function(){
-  var SEL = 'h1, .lede, .eyebrow, main h2, .body p, .callout p, .key p, .tile-title, .tile-desc';
+  var SEL = 'h1, .lede, .eyebrow, main h2, main > section > p, .body p, .callout p, .key p, .tile-title, .tile-desc, .tour li, .checklist li, .card li, .flow b, .flow span.d';
   var main = document.querySelector('main');
   if (!main) return;
   var nodes = Array.prototype.slice.call(main.querySelectorAll(SEL));
@@ -361,7 +532,7 @@ body.editing p[data-k]:empty{display:block; min-height:1.4em}
     out.querySelectorAll('[data-k]').forEach(function(n){ n.removeAttribute('data-k'); });
     out.querySelectorAll('[hidden]').forEach(function(n){ n.removeAttribute('hidden'); });
         var json = JSON.stringify(tipState.filter(function(t){ return t.title || t.body; }), null, 1).replace(/</g, '\\u003c');
-    var parts = ['title', 'meta[name="claude:viewport-fit-sides"]', 'link[rel="stylesheet"]', '#page-style', '#tabs-style', '#editor-style']
+    var parts = ['title', 'meta[name="claude:viewport-fit-sides"]', 'link[rel="stylesheet"]', '#page-style', '#tabs-style', '#vestwell-style', '#editor-style']
       .map(function(s){ var e = document.querySelector(s); return e ? e.outerHTML : ''; }).join('\n');
     var router = document.getElementById('router-script');
     var script = document.getElementById('editor-script');
