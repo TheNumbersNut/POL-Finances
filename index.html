@@ -141,6 +141,7 @@ body.editing .tip h3:focus, body.editing .tip-body:focus{outline:2px solid var(-
 #calc .seg button{font:700 1rem var(--body); border:0; border-radius:9px; padding:10px 8px; background:transparent; color:var(--muted); cursor:pointer; line-height:1.2}
 #calc .seg button small{display:block; font-weight:400; font-size:.8rem; margin-top:2px}
 #calc .seg button[aria-pressed="true"]{background:var(--accent); color:var(--bg)}
+#calc .seg3{grid-template-columns:repeat(3,1fr)}
 #calc button:focus-visible, #calc input:focus-visible{outline:3px solid var(--mark); outline-offset:2px}
 #calc .slide-top{display:flex; justify-content:space-between; align-items:baseline; gap:10px}
 #calc .slide-val{font-family:var(--display); font-size:2rem; font-weight:700; color:var(--accent); line-height:1}
@@ -526,6 +527,21 @@ body.editing p[data-k]:empty{display:block; min-height:1.4em}
       </div>
     </div>
 
+    <div class="field">
+      <span class="lab" id="acctlab">Which kind of 401(k)?</span>
+      <div class="seg seg3" role="group" aria-labelledby="acctlab">
+        <button type="button" data-acct="pretax" aria-pressed="true">Pretax</button>
+        <button type="button" data-acct="roth" aria-pressed="false">Roth</button>
+        <button type="button" data-acct="split" aria-pressed="false">Some of each</button>
+      </div>
+      <p class="hint">Check your paycheck: your 401(k) line under <b>Deductions</b> says Pretax or Roth. This choice is only for your own money. <b>Paramount's match always goes into Pretax.</b></p>
+    </div>
+    <div class="field" id="split-box" hidden>
+      <div class="slide-top"><label for="rothpct">Roth share of your money</label><span class="slide-val tnum" id="rothpct-out">50%</span></div>
+      <input id="rothpct" type="range" min="10" max="90" step="10" value="50">
+      <p class="hint tnum" id="split-line"></p>
+    </div>
+
     <p class="note tnum" id="matchnote"></p>
     <p class="note warn tnum" id="limit-note" hidden></p>
 
@@ -541,10 +557,10 @@ body.editing p[data-k]:empty{display:block; min-height:1.4em}
     </div>
 
     <div class="field">
-      <div class="slide-top"><label for="raise">Raises per year</label><span class="slide-val tnum" id="raise-out">2%</span></div>
-      <input id="raise" type="range" min="0" max="6" step="0.5" value="2" aria-describedby="raise-hint">
+      <div class="slide-top"><label for="raise" id="raise-lab">Grow what goes in each year</label><span class="slide-val tnum" id="raise-out">0%</span></div>
+      <input id="raise" type="range" min="0" max="6" step="0.5" value="0" aria-describedby="raise-hint">
       <div class="ticks"><span>0%</span><span>2%</span><span>4%</span><span>6%</span></div>
-      <p class="hint" id="raise-hint">As your pay goes up, the amount you and Paramount put in goes up too.</p>
+      <p class="hint" id="raise-hint">If you save a percentage of your pay, set this to your expected raise, since your dollars (and Paramount's match) go up with your pay. If you put in a fixed dollar amount, leave it at 0%.</p>
     </div>
   </section>
 
@@ -579,6 +595,7 @@ body.editing p[data-k]:empty{display:block; min-height:1.4em}
         <span id="ss-row-lab"><span class="sw" style="background:var(--match)"></span>Social Security (estimate)</span><span class="v" id="inc-ss"></span>
       </div>
       <p class="hint tnum" id="inc-sum"></p>
+      <p class="hint tnum" id="inc-tax"></p>
       <hr class="divider">
       <div class="field" id="sspay-box"><label for="sspay">Your yearly pay today (for Social Security)</label><div class="money"><span>$</span><input id="sspay" type="number" inputmode="numeric" min="0" step="500" value="41600"></div>
         <p class="hint">Before taxes. $20 an hour for 40 hours a week is about $41,600.</p></div>
@@ -593,6 +610,29 @@ body.editing p[data-k]:empty{display:block; min-height:1.4em}
       </div>
       <p class="hint">401(k) amount uses the common "4% rule": take out about 4% of your balance each year so it can last around 30 years. The Social Security estimate uses the government's benefit formula and assumes you work about 35 years at today's pay. For your real number, create a free account at <b>ssa.gov/myaccount</b>.</p>
       <p class="note warn tnum" id="ss-cut"></p>
+    </div>
+  </section>
+
+  <section>
+    <div class="head"><span class="eyebrow">Pretax or Roth</span><h2>Which costs less, now and later?</h2></div>
+    <p>Both put the same dollars in your account, so your balance is the same. The difference is <b>when you pay income tax</b>: Pretax skips it now and you pay it when you take money out. Roth pays it now and comes out tax-free later.</p>
+    <div class="card">
+      <div class="field">
+        <div class="slide-top"><label for="taxnow">Your income tax rate now</label><span class="slide-val tnum" id="taxnow-out">17%</span></div>
+        <input id="taxnow" type="range" min="0" max="35" step="1" value="17">
+        <p class="hint">Most full-time Paramount employees pay about 12% federal plus about 5% South Carolina tax on their last dollars earned, so about 17%.</p>
+      </div>
+      <div class="field">
+        <div class="slide-top"><label for="taxlater">Your income tax rate in retirement</label><span class="slide-val tnum" id="taxlater-out">10%</span></div>
+        <input id="taxlater" type="range" min="0" max="35" step="1" value="10">
+        <p class="hint">Often lower than now, since most people live on less in retirement. It's a guess, and tax laws change.</p>
+      </div>
+      <div class="tablewrap"><table>
+        <thead><tr><th></th><th class="r">Costs your take-home now</th><th class="r">Spendable later</th></tr></thead>
+        <tbody id="pr-rows"></tbody>
+      </table></div>
+      <p class="hint">Both columns are per month. "Spendable later" is your 401(k) income after income tax, in today's dollars, not counting Social Security. Roth costs more now, so to compare fairly, look at Roth next to "Pretax, same cost as Roth." The simple rule: if you expect a <b>lower</b> tax rate in retirement, Pretax wins. If you expect a <b>higher</b> one, Roth wins.</p>
+      <p class="note tnum" id="pr-note"></p>
     </div>
   </section>
 
@@ -797,7 +837,7 @@ body.editing p[data-k]:empty{display:block; min-height:1.4em}
 <script id="calc-script">
 (function(){
   var $ = function(id){ return document.getElementById(id); };
-  var state = { mode:'dollars', pay:'hourly' };
+  var state = { mode:'dollars', pay:'hourly', acct:'pretax', raise:{ dollars:0, pct:2 } };
   var LIMIT = 24500, CATCH50 = 8000, CATCH60 = 11250, INFL = 0.025, BP1 = 1340, BP2 = 8077, TAXMAX = 192300, ssAge = 67;
 
   function fmt(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
@@ -818,6 +858,7 @@ body.editing p[data-k]:empty{display:block; min-height:1.4em}
   }
   // IRS yearly limit for your own money at a given age, in today's dollars (limits rise with prices over time).
   function limitAt(age){ return LIMIT + (age >= 60 && age <= 63 ? CATCH60 : age >= 50 ? CATCH50 : 0); }
+  function rothShare(){ return state.acct === 'roth' ? 1 : state.acct === 'split' ? num('rothpct', 50) / 100 : 0; }
   function yearlyPay(){ return state.pay === 'hourly' ? num('rate', 0) * num('hours', 0) * 52 : num('salary', 0); }
 
   // Yearly amounts going in during the first year, for whichever entry mode is on.
@@ -829,18 +870,20 @@ body.editing p[data-k]:empty{display:block; min-height:1.4em}
 
   // Year by year. Money goes in through the year, so it gets about half a year of growth.
   function project(o){
+    var rs = o.roth === undefined ? rothShare() : o.roth, rb = 0;
     var bal = o.start, you = 0, co = 0, youR = 0, coR = 0, pts = [{age:o.age, bal:bal, you:o.start, co:0}];
     for (var y = 0; y < o.years; y++){
       var g = Math.pow(1 + o.raise, y), on = y >= o.delay;
       var mine = on ? Math.min(o.mine * g, limitAt(o.age + y) * Math.pow(1 + INFL, y)) : 0, match = on ? o.co * g : 0;
       bal = bal * (1 + o.ret) + (mine + match) * (1 + o.ret / 2);
+      rb = rb * (1 + o.ret) + mine * rs * (1 + o.ret / 2);
       you += mine; co += match;
       var dm = Math.pow(1 + INFL, y + 0.5); youR += mine / dm; coR += match / dm;
       var d = Math.pow(1 + INFL, y + 1);
       pts.push({age:o.age + y + 1, bal:bal / d, you:o.start + youR, co:o.start + youR + coR});
     }
     var D = Math.pow(1 + INFL, o.years);
-    return { future:bal, bal:bal / D, you:youR, co:coR, start:o.start, growth:bal / D - o.start - youR - coR, pts:pts };
+    return { future:bal, roth:rb / D, bal:bal / D, you:youR, co:coR, start:o.start, growth:bal / D - o.start - youR - coR, pts:pts };
   }
 
   function chart(pts){
@@ -875,7 +918,7 @@ body.editing p[data-k]:empty{display:block; min-height:1.4em}
   function render(){
     var age = Math.round(num('age', 30)), ret = Math.round(num('retire', 65));
     var years = Math.max(0, ret - age);
-    var r = num('ret', 7) / 100, raise = num('raise', 2) / 100;
+    var r = num('ret', 7) / 100, raise = num('raise', 0) / 100;
     $('ret-out').textContent = (r*100).toFixed(1).replace(/\.0$/,'') + '%';
     $('raise-out').textContent = (raise*100).toFixed(1).replace(/\.0$/,'') + '%';
     var base = { age:age, years:years, ret:r, raise:raise, start:num('bal', 0), delay:0 };
@@ -929,6 +972,35 @@ body.editing p[data-k]:empty{display:block; min-height:1.4em}
     $('inc-sum').textContent = on ? '401(k) plus Social Security.' : 'Your 401(k) only. Social Security would add about ' + fmt(ss) + ' a month in today\'s dollars.';
     $('ss-cut').textContent = "Social Security's trustees project that, unless Congress makes changes, it could pay about 83% of promised benefits starting around 2034. At 83%, your estimate would be about " + fmt(ss * 0.83) + ' a month.';
 
+    // pretax vs roth
+    var tN = num('taxnow', 17) / 100, tL = num('taxlater', 10) / 100;
+    $('taxnow-out').textContent = Math.round(tN*100) + '%';
+    $('taxlater-out').textContent = Math.round(tL*100) + '%';
+    var rsh = rothShare();
+    $('rothpct-out').textContent = Math.round(rsh*100) + '%';
+    var fm = firstYear(0).mine / 12;
+    $('split-line').textContent = 'About ' + fmt(fm*rsh) + ' a month to Roth and ' + fmt(fm*(1-rsh)) + ' to Pretax.';
+    function prRow(label, share, me, scale){
+      var f = firstYear(0); f.mine = f.mine * (scale || 1);
+      var x = project(Object.assign({}, base, f, {roth:share}));
+      var m = f.mine / 12;
+      var now = m * (share + (1 - share) * (1 - tN));
+      var later = ((x.bal - x.roth) * (1 - tL) + x.roth) * 0.04 / 12;
+      return { html:'<tr' + (me ? ' class="me"' : '') + '><td>' + label + (me ? '<span class="pill">You</span>' : '') + '</td><td class="r">' + fmt(now) + '</td><td class="r">' + fmt(later) + '</td></tr>', now:now, later:later };
+    }
+    var pP = prRow('All Pretax', 0, state.acct === 'pretax'), pR = prRow('All Roth', 1, state.acct === 'roth');
+    var up = tN < 1 ? 1 / (1 - tN) : 1;
+    var pS = prRow('Pretax, same cost as Roth<br><small class="hint">Put ' + fmt(fm * up) + ' in, so the tax you save goes in too</small>', 0, false, up);
+    var rowsPR = [pP.html, pR.html, pS.html];
+    if (state.acct === 'split') rowsPR.push(prRow(Math.round(rsh*100) + '% Roth', rsh, true).html);
+    $('pr-rows').innerHTML = rowsPR.join('');
+    var gap = pR.later - pS.later;
+    $('pr-note').innerHTML = fm <= 0 ? 'Enter what you put in to compare.'
+      : Math.abs(tN - tL) < 0.005 ? '<b>About a tie.</b> When your tax rate is the same now and in retirement, Pretax and Roth come out about the same for the same cost to your paycheck.'
+      : tL > tN ? '<b>Roth comes out ahead</b> because your tax rate in retirement (' + Math.round(tL*100) + '%) is higher than now (' + Math.round(tN*100) + '%). For the same cost to your paycheck, Roth gives you about ' + fmt(gap) + ' more a month to spend later.'
+      : '<b>Pretax comes out ahead</b> because your tax rate now (' + Math.round(tN*100) + '%) is higher than in retirement (' + Math.round(tL*100) + '%). For the same cost to your paycheck, Pretax gives you about ' + fmt(-gap) + ' more a month to spend later, as long as the tax you save goes into your 401(k) too.';
+    $('inc-tax').textContent = 'Income tax on the Pretax part of your 401(k) comes out of the 401(k) amount above. After tax, it\'s about ' + fmt(((res.bal - res.roth) * (1 - tL) + res.roth) * 0.04 / 12) + ' a month in today\'s dollars.';
+
     // compare
     var rows;
     if (dollars){
@@ -957,13 +1029,26 @@ body.editing p[data-k]:empty{display:block; min-height:1.4em}
   }
 
   function press(ids, on){ ids.forEach(function(id){ $(id).setAttribute('aria-pressed', id === on); }); }
-  $('mode-dollars').addEventListener('click', function(){ state.mode = 'dollars'; press(['mode-dollars','mode-pct'], 'mode-dollars'); $('dollars-box').hidden = false; $('pct-box').hidden = true; render(); });
-  $('mode-pct').addEventListener('click', function(){ state.mode = 'pct'; press(['mode-dollars','mode-pct'], 'mode-pct'); $('dollars-box').hidden = true; $('pct-box').hidden = false; render(); });
+  function setRaiseUI(){
+    $('raise').value = state.raise[state.mode];
+    $('raise-lab').textContent = state.mode === 'dollars' ? 'Grow what goes in each year' : 'Raises per year';
+    $('raise-hint').innerHTML = state.mode === 'dollars'
+      ? 'If you save a percentage of your pay, set this to your expected raise, since your dollars (and Paramount\'s match) go up with your pay. If you put in a fixed dollar amount, leave it at 0%.'
+      : 'As your pay goes up, the amount you and Paramount put in goes up too.';
+  }
+  $('raise').addEventListener('input', function(){ state.raise[state.mode] = parseFloat($('raise').value); });
+  $('mode-dollars').addEventListener('click', function(){ state.mode = 'dollars'; press(['mode-dollars','mode-pct'], 'mode-dollars'); setRaiseUI(); $('dollars-box').hidden = false; $('pct-box').hidden = true; render(); });
+  $('mode-pct').addEventListener('click', function(){ state.mode = 'pct'; press(['mode-dollars','mode-pct'], 'mode-pct'); setRaiseUI(); $('dollars-box').hidden = true; $('pct-box').hidden = false; render(); });
   $('pay-hourly').addEventListener('click', function(){ state.pay = 'hourly'; press(['pay-hourly','pay-yearly'], 'pay-hourly'); $('hourly-box').hidden = false; $('yearly-box').hidden = true; render(); });
   $('pay-yearly').addEventListener('click', function(){ state.pay = 'yearly'; press(['pay-hourly','pay-yearly'], 'pay-yearly'); $('hourly-box').hidden = true; $('yearly-box').hidden = false; render(); });
   document.querySelectorAll('[data-ss]').forEach(function(b){ b.addEventListener('click', function(){ ssAge = parseInt(b.dataset.ss, 10); document.querySelectorAll('[data-ss]').forEach(function(o){ o.setAttribute('aria-pressed', o === b); }); render(); }); });
   ['age','retire','mine','co','rate','hours','salary','save','bal','ret','raise','sspay'].forEach(function(id){ $(id).addEventListener('input', render); });
   $('ss-on').addEventListener('change', render);
+  ['rothpct','taxnow','taxlater'].forEach(function(id){ $(id).addEventListener('input', render); });
+  document.querySelectorAll('[data-acct]').forEach(function(b){ b.addEventListener('click', function(){
+    state.acct = b.dataset.acct;
+    document.querySelectorAll('[data-acct]').forEach(function(o){ o.setAttribute('aria-pressed', o === b); });
+    $('split-box').hidden = state.acct !== 'split'; render(); }); });
   render();
 })();
 </script>
