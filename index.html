@@ -484,20 +484,20 @@ body.editing p[data-k]:empty{display:block; min-height:1.4em}
 
   <section class="card" aria-label="Your numbers">
     <div class="row2">
-      <div class="field"><label for="age">Your age</label><div class="plain"><input id="age" type="number" inputmode="numeric" min="16" max="75" value="30"><span class="unit">years</span></div></div>
+      <div class="field"><label for="age">Your age</label><div class="plain"><input id="age" type="number" inputmode="numeric" min="16" max="75" value="25"><span class="unit">years</span></div></div>
       <div class="field"><label for="retire">Retire at</label><div class="plain"><input id="retire" type="number" inputmode="numeric" min="40" max="80" value="65"><span class="unit">years</span></div></div>
     </div>
 
     <div class="field">
       <span class="lab" id="modelab">How do you want to enter your savings?</span>
       <div class="seg" role="group" aria-labelledby="modelab">
-        <button type="button" id="mode-dollars" aria-pressed="true">Dollars a month<small>Easiest</small></button>
-        <button type="button" id="mode-pct" aria-pressed="false">% of my pay<small>Uses your wage</small></button>
+        <button type="button" id="mode-dollars" aria-pressed="false">Dollars a month<small>Easiest</small></button>
+        <button type="button" id="mode-pct" aria-pressed="true">% of my pay<small>Uses your wage</small></button>
       </div>
     </div>
 
     <!-- Dollars a month -->
-    <div id="dollars-box" class="card" style="padding:0;border:0;gap:14px">
+    <div id="dollars-box" hidden class="card" style="padding:0;border:0;gap:14px">
       <div class="row2">
         <div class="field"><label for="mine">You put in a month</label><div class="money"><span>$</span><input id="mine" type="number" inputmode="numeric" min="0" step="10" value="175"></div></div>
         <div class="field"><label for="co">Paramount adds a month</label><div class="money"><span>$</span><input id="co" type="number" inputmode="numeric" min="0" step="10" value="140"></div></div>
@@ -506,7 +506,7 @@ body.editing p[data-k]:empty{display:block; min-height:1.4em}
     </div>
 
     <!-- % of pay -->
-    <div id="pct-box" hidden style="display:flex;flex-direction:column;gap:14px">
+    <div id="pct-box" style="display:flex;flex-direction:column;gap:14px">
       <div class="field">
         <span class="lab" id="paylab">How you're paid</span>
         <div class="seg" role="group" aria-labelledby="paylab">
@@ -514,9 +514,13 @@ body.editing p[data-k]:empty{display:block; min-height:1.4em}
           <button type="button" id="pay-yearly" aria-pressed="false">Yearly salary</button>
         </div>
       </div>
-      <div class="row2" id="hourly-box">
-        <div class="field"><label for="rate">Hourly pay</label><div class="money"><span>$</span><input id="rate" type="number" inputmode="decimal" min="0" step="0.25" value="20"></div></div>
+      <div id="hourly-box" style="display:flex;flex-direction:column;gap:14px">
+      <div class="row2">
+        <div class="field"><label for="rate">Hourly pay</label><div class="money"><span>$</span><input id="rate" type="number" inputmode="decimal" min="0" step="0.25" value="21"></div></div>
         <div class="field"><label for="hours">Hours a week</label><div class="plain"><input id="hours" type="number" inputmode="numeric" min="0" max="80" value="40"><span class="unit">hrs</span></div></div>
+      </div>
+        <div class="field"><label for="weeks">Weeks worked a year</label><div class="plain"><input id="weeks" type="number" inputmode="numeric" min="1" max="52" value="50"><span class="unit">weeks</span></div>
+          <p class="hint">Count paid weeks, including paid time off. Leave out unpaid time off and slow-season weeks without pay.</p></div>
       </div>
       <div class="field" id="yearly-box" hidden><label for="salary">Yearly salary (before taxes)</label><div class="money"><span>$</span><input id="salary" type="number" inputmode="numeric" min="0" step="500" value="50000"></div></div>
       <p class="hint tnum" id="payline"></p>
@@ -547,11 +551,11 @@ body.editing p[data-k]:empty{display:block; min-height:1.4em}
 
     <hr class="divider">
 
-    <div class="field"><label for="bal">Already in your 401(k)</label><div class="money"><span>$</span><input id="bal" type="number" inputmode="numeric" min="0" step="100" value="0"></div></div>
+    <div class="field"><label for="bal">Already in your 401(k)</label><div class="money"><span>$</span><input id="bal" type="number" inputmode="numeric" min="0" step="100" value="500"></div></div>
 
     <div class="field">
-      <div class="slide-top"><label for="ret">Return %</label><span class="slide-val tnum" id="ret-out">6%</span></div>
-      <input id="ret" type="range" min="0" max="12" step="0.5" value="6" aria-describedby="ret-hint">
+      <div class="slide-top"><label for="ret">Return %</label><span class="slide-val tnum" id="ret-out">7%</span></div>
+      <input id="ret" type="range" min="0" max="12" step="0.5" value="7" aria-describedby="ret-hint">
       <div class="ticks"><span>0%</span><span>3%</span><span>6%</span><span>9%</span><span>12%</span></div>
       <p class="hint" id="ret-hint">How much your investments grow each year on average. A common planning number for the stock market is about <b>7% a year</b>. A mix that includes some bonds is often closer to 6%. Some years are up, some are down.</p>
     </div>
@@ -597,8 +601,8 @@ body.editing p[data-k]:empty{display:block; min-height:1.4em}
       <p class="hint tnum" id="inc-sum"></p>
       <p class="hint tnum" id="inc-tax"></p>
       <hr class="divider">
-      <div class="field" id="sspay-box"><label for="sspay">Your yearly pay today (for Social Security)</label><div class="money"><span>$</span><input id="sspay" type="number" inputmode="numeric" min="0" step="500" value="41600"></div>
-        <p class="hint">Before taxes. $20 an hour for 40 hours a week is about $41,600.</p></div>
+      <div class="field" id="sspay-box"><label for="sspay">Your yearly pay today (for Social Security)</label><div class="money"><span>$</span><input id="sspay" type="number" inputmode="numeric" min="0" step="500" value="42000"></div>
+        <p class="hint">Before taxes. $21 an hour for 40 hours a week, 50 weeks a year, is $42,000.</p></div>
       <p class="hint tnum" id="sspay-note" hidden></p>
       <div class="field">
         <span class="lab" id="sslab">Start Social Security at</span>
@@ -837,7 +841,7 @@ body.editing p[data-k]:empty{display:block; min-height:1.4em}
 <script id="calc-script">
 (function(){
   var $ = function(id){ return document.getElementById(id); };
-  var state = { mode:'dollars', pay:'hourly', acct:'pretax', raise:{ dollars:0, pct:2 } };
+  var state = { mode:'pct', pay:'hourly', acct:'pretax', raise:{ dollars:0, pct:2 } };
   var LIMIT = 24500, CATCH50 = 8000, CATCH60 = 11250, INFL = 0.025, BP1 = 1340, BP2 = 8077, TAXMAX = 192300, ssAge = 67;
 
   function fmt(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
@@ -859,7 +863,7 @@ body.editing p[data-k]:empty{display:block; min-height:1.4em}
   // IRS yearly limit for your own money at a given age, in today's dollars (limits rise with prices over time).
   function limitAt(age){ return LIMIT + (age >= 60 && age <= 63 ? CATCH60 : age >= 50 ? CATCH50 : 0); }
   function rothShare(){ return state.acct === 'roth' ? 1 : state.acct === 'split' ? num('rothpct', 50) / 100 : 0; }
-  function yearlyPay(){ return state.pay === 'hourly' ? num('rate', 0) * num('hours', 0) * 52 : num('salary', 0); }
+  function yearlyPay(){ return state.pay === 'hourly' ? num('rate', 0) * num('hours', 0) * Math.min(52, num('weeks', 50)) : num('salary', 0); }
 
   // Yearly amounts going in during the first year, for whichever entry mode is on.
   function firstYear(extra){
@@ -1042,13 +1046,14 @@ body.editing p[data-k]:empty{display:block; min-height:1.4em}
   $('pay-hourly').addEventListener('click', function(){ state.pay = 'hourly'; press(['pay-hourly','pay-yearly'], 'pay-hourly'); $('hourly-box').hidden = false; $('yearly-box').hidden = true; render(); });
   $('pay-yearly').addEventListener('click', function(){ state.pay = 'yearly'; press(['pay-hourly','pay-yearly'], 'pay-yearly'); $('hourly-box').hidden = true; $('yearly-box').hidden = false; render(); });
   document.querySelectorAll('[data-ss]').forEach(function(b){ b.addEventListener('click', function(){ ssAge = parseInt(b.dataset.ss, 10); document.querySelectorAll('[data-ss]').forEach(function(o){ o.setAttribute('aria-pressed', o === b); }); render(); }); });
-  ['age','retire','mine','co','rate','hours','salary','save','bal','ret','raise','sspay'].forEach(function(id){ $(id).addEventListener('input', render); });
+  ['age','retire','mine','co','rate','hours','weeks','salary','save','bal','ret','raise','sspay'].forEach(function(id){ $(id).addEventListener('input', render); });
   $('ss-on').addEventListener('change', render);
   ['rothpct','taxnow','taxlater'].forEach(function(id){ $(id).addEventListener('input', render); });
   document.querySelectorAll('[data-acct]').forEach(function(b){ b.addEventListener('click', function(){
     state.acct = b.dataset.acct;
     document.querySelectorAll('[data-acct]').forEach(function(o){ o.setAttribute('aria-pressed', o === b); });
     $('split-box').hidden = state.acct !== 'split'; render(); }); });
+  setRaiseUI();
   render();
 })();
 </script>
